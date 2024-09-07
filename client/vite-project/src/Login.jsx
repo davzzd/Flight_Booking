@@ -10,8 +10,7 @@ const Login = () => {
         e.preventDefault();
         try {
             // If using Axios, uncomment the following block and comment out the Fetch block
-
-            const response = await axios.post('http://localhost:3001/api/register', {
+            const response = await axios.post('http://localhost:3000/api/register', {
                 username,
                 password,
             });
@@ -39,7 +38,9 @@ const Login = () => {
     };
 
     return (
-        <form onSubmit={handleLogin}>
+
+        <form onSubmit={handleLogin} className='Login'>
+            <h1>Login</h1>
             <input
                 type="text"
                 placeholder="Username"

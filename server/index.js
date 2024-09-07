@@ -30,6 +30,7 @@ app.post('/api/register', async (req, res) => {
       console.error('Stack trace:', error.stack);  // Log the full stack trace
       return res.status(500).json({ message: 'Server error', error: error.message });
   }
+
 });
 
 
@@ -55,8 +56,40 @@ app.post('/api/login', async (req, res) => {
 */
 // Sync the database and start the server
 db.sequelize.sync().then(() => {
-    app.listen(3001, () => {
-        console.log("Server is running on port 3001");
+    app.listen(3000, () => {
+        console.log("Server is running on port 3000");
+    });
+}).catch(err => {
+    console.error("Failed to sync database: ", err);
+});
+
+
+
+
+// Route to handle user login (optional, based on your needs)
+/*
+app.post('/api/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        // Find the user by username and password
+        const user = await db.User.findOne({ where: { username, password } });
+
+        if (user) {
+            return res.json({ message: 'Login successful', user });
+        } else {
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return res.status(500).json({ message: 'Server error', error });
+    }
+});
+*/
+// Sync the database and start the server
+db.sequelize.sync().then(() => {
+    app.listen(3000, () => {
+        console.log("Server is running on port 3000");
     });
 }).catch(err => {
     console.error("Failed to sync database: ", err);
