@@ -1,3 +1,109 @@
+import React, { useState } from "react";
+import axios from "axios";
+
+const Login = () => {
+  const [isLogin, setIsLogin] = useState(true);  // Toggle between login and register
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");  // New state for first name
+  const [lastName, setLastName] = useState("");    // New state for last name
+  const [country, setCountry] = useState("");      // New state for country
+
+  // Toggle between Login and Register
+  const toggleLoginRegister = () => {
+    setIsLogin(!isLogin);
+  };
+
+  // Handle Registration
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:3001/api/register", {
+        username,
+        password,
+        firstName,
+        lastName,
+        country,   // Add country to the request
+      });
+      alert(res.data.message);
+    } catch (error) {
+      console.error("Registration failed", error);
+      alert("Registration failed, please try again.");
+    }
+  };
+
+  // Handle Login
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:3001/api/login", {
+        username,
+        password,
+      });
+      alert(res.data.message);
+    } catch (error) {
+      console.error("Login failed", error);
+      alert("Login failed, please check your credentials.");
+    }
+  };
+
+  return (
+    <div>
+      <h1>{isLogin ? "Login" : "Register"}</h1>
+      <form onSubmit={isLogin ? handleLogin : handleRegister}>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        {!isLogin && (
+          <>
+            <input
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+            <input
+              type="text"
+              placeholder="Country"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              required
+            />
+          </>
+        )}
+        <button type="submit">{isLogin ? "Login" : "Register"}</button>
+      </form>
+      <button onClick={toggleLoginRegister}>
+        {isLogin ? "Don't have an account? Register" : "Already have an account? Login"}
+      </button>
+    </div>
+  );
+};
+
+export default Login;
+
+
+
+/*
 import React, { useState } from 'react';
 // If using Axios, uncomment the next line
 import axios from 'axios';
@@ -15,22 +121,7 @@ const Login = () => {
                 password,
             });
             console.log('Response:', response.data);
-            alert('User created successfully');
-          
-
-            // If using Fetch, uncomment the following block and comment out the Axios block
-            /*
-            const response = await fetch('http://localhost:3001/api/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password }),
-            });
-            const data = await response.json();
-            console.log('Response:', data);
-            alert('User created successfully');
-            */
+            alert('User created successfully');     
         } catch (error) {
             console.error('Error:', error);
             alert('An error occurred. Please try again.');
@@ -57,62 +148,6 @@ const Login = () => {
         </form>
     );
 };
-
-export default Login;
-
-
-/*
-import React, { useState } from 'react';
-
-function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:3000/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        setMessage('User created successfully!');
-      } else {
-        setMessage(data.message || 'Login failed');
-      }
-    } catch (error) {
-      setMessage('An error occurred. Please try again.');
-    }
-  };
-
-  return (
-    <div className='Login'>
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
-      </form>
-      <p>{message}</p>
-    </div>
-  );
-}
 
 export default Login;
 */
