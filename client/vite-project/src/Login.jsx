@@ -23,14 +23,19 @@ const Login = () => {
         password,
         firstName,
         lastName,
-        country,   // Add country to the request
+        country,
       });
-      alert(res.data.message);
+      alert(res.data.message);  // Display success or error message from the server
     } catch (error) {
-      console.error("Registration failed", error);
-      alert("Registration failed, please try again.");
+      if (error.response && error.response.data.message) {
+        // Show specific error message returned by the backend
+        alert(error.response.data.message);
+      } else {
+        alert("Registration failed, please try again.");
+      }
     }
   };
+  
 
   // Handle Login
   const handleLogin = async (e) => {
@@ -48,7 +53,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="Register">
       <h1>{isLogin ? "Login" : "Register"}</h1>
       <form onSubmit={isLogin ? handleLogin : handleRegister}>
         <input
@@ -90,9 +95,9 @@ const Login = () => {
             />
           </>
         )}
-        <button type="submit">{isLogin ? "Login" : "Register"}</button>
+        <button className="submit" type="submit">{isLogin ? "Login" : "Register"}</button>
       </form>
-      <button onClick={toggleLoginRegister}>
+      <button className="reg" onClick={toggleLoginRegister}>
         {isLogin ? "Don't have an account? Register" : "Already have an account? Login"}
       </button>
     </div>
