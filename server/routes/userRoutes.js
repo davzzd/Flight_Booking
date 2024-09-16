@@ -1,46 +1,20 @@
 const express = require('express');
-const cors = require('cors');
-const db = require('./models');
-const userRoutes = require('./routes/userRoutes'); // Import the routes
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-// Use the routes
-app.use('/api', userRoutes);
-
-db.sequelize.sync().then(() => {
-  app.listen(3001, () => {
-    console.log("Server is running on port 3001");
-  });
-});
-
-/*
-const express = require("express");
-const cors = require("cors");
-const bcrypt = require("bcrypt"); // For password hashing
-const db = require("./models");
-
-const app = express();
-app.use(cors());
-app.use(express.json());
+const router = express.Router();
+const bcrypt = require('bcrypt');
+const db = require('../models');
 
 // Register a new user
-app.post("/api/register", async (req, res) => {
+router.post('/register', async (req, res) => {
   const { username, password, firstName, lastName, country } = req.body;
 
   try {
-    // Check if user already exists
     const existingUser = await db.User.findOne({ where: { username } });
     if (existingUser) {
       return res.status(400).json({ message: "Username already taken" });
     }
 
-    // Hash password before saving
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create new user
     const newUser = await db.User.create({
       username,
       password: hashedPassword,
@@ -50,23 +24,21 @@ app.post("/api/register", async (req, res) => {
     });
     res.status(201).json({ message: "User created successfully", user: newUser });
   } catch (error) {
-    console.error("Error during registration:", error);  // Log the actual error
+    console.error("Error during registration:", error);
     res.status(500).json({ message: "Server error, please try again", error: error.message });
   }
 });
 
 // Login user
-app.post("/api/login", async (req, res) => {
+router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // Check if user exists
     const user = await db.User.findOne({ where: { username } });
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
 
-    // Compare the passwords
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(400).json({ message: "Invalid password" });
@@ -78,10 +50,4 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-// Sync DB and start server
-db.sequelize.sync().then(() => {
-  app.listen(3001, () => {
-    console.log("Server is running on port 3001");
-  });
-});
-*/
+module.exports = router;
