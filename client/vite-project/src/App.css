@@ -1,18 +1,155 @@
-.App {
 
+/* General styling */
+body {
+  background: linear-gradient(to left, rgb(182, 244, 146), rgb(51, 139, 147));
+  margin: 0;
+  font-family: Verdana, sans-serif;
+}
+
+.App {
   text-align: center;
-  background-color:#088F8F    ;
-  margin: none;
+  background-color: rgba(12, 15, 184, 0.005);
+  margin: 0 auto;
   color: white;
-  font-family: verdana;
   border-radius: 45px;
   padding: 20px;
   width: 650px;
-  height: 135px;
-  margin-left: auto; margin-right: auto;
-  margin-top: 200px;
+  min-height: 300px;
+  margin-top: 100px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
-body {
-  background: linear-gradient(to left, rgb(182, 244, 146), rgb(51, 139, 147));
+/* Container for login and registration */
+.Login, .Register {
+  margin-top: 0px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.2); /* Translucent background */
+  border-radius: 45px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 500px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  backdrop-filter: blur(10px); /* For a blurred glass-like effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Optional: subtle border */
 }
+
+/* Input styling */
+input {
+  border-radius: 45px;
+  border: none;
+  padding: 10px;
+  margin: 10px;
+  width: 80%;
+  font-size: 16px;
+  outline: none;
+}
+
+/*register button styling*/
+.reg{
+  border-radius: 45px;
+  border: none;
+  font-family: Verdana, sans-serif;
+  color: white;
+  background-color:  rgb(51, 139, 147);
+  padding: 10px 20px;
+  margin-top: 20px;
+  margin-left: 10px;
+  font-weight: lighter;
+  font-size: small;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/*login button styling*/
+.submit{
+  height: 50px;
+  width: 150px;
+  font-size: larger;
+}
+
+/* Button styling */
+button {
+  border-radius: 45px;
+  border: none;
+  font-family: Verdana, sans-serif;
+  color: white;
+  background-color: rgb(241, 169, 75);
+  padding: 10px 20px;
+  margin-top: 20px;
+  margin-left: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: rgb(255, 146, 3);
+  transform: scale(1.05);
+}
+
+button:active {
+  background-color: rgb(223, 94, 2);
+  color: rgb(255, 224, 209);
+}
+
+button:visited {
+  background-color: rgb(255, 255, 255);
+  color: rgb(157, 117, 237);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .App {
+    width: 90%;
+  }
+
+  .Login, .Register {
+    width: 90%;
+    padding: 15px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+/* Navbar styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  position: absolute; /* To position it at the top */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.navbar nav {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+/* Links styling */
+.navbar a {
+  margin-left: 20px;
+  font-size: 18px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  color: #f0a500; /* Change link color on hover */
+}
+
+/* Additional styling for login link to float right */
+.login-link {
+  margin-right: 20px;
+}
+
