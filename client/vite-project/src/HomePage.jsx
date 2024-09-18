@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function HomePage({ isLoggedIn }) {
   return (
     <div>
-      <h1>Welcome to the Booking App</h1>
+      <h1>Welcome to the HomePage</h1>
       {isLoggedIn ? (
         <Link to="/booking">
           <button>Go to Booking Page</button>
