@@ -1,3 +1,4 @@
+
 /* General styling */
 body {
   background: linear-gradient(to left, rgb(182, 244, 146), rgb(51, 139, 147));
@@ -21,11 +22,11 @@ body {
 
 /* Container for login and registration */
 .Login, .Register {
-  margin-top: 50px;
+  margin-top: 0px;
   padding: 30px;
   background: rgba(255, 255, 255, 0.2); /* Translucent background */
   border-radius: 45px;
-  width: 80%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   max-width: 500px;
@@ -46,6 +47,7 @@ input {
   outline: none;
 }
 
+/*register button styling*/
 .reg{
   border-radius: 45px;
   border: none;
@@ -61,6 +63,7 @@ input {
   transition: all 0.3s ease;
 }
 
+/*login button styling*/
 .submit{
   height: 50px;
   width: 150px;
@@ -113,68 +116,40 @@ button:visited {
   }
 }
 
-
-/*
-.App {
-
-  text-align: center;
-  background-color:rgba(12, 15, 184, 0.005);
-  margin: none;
-  color: white;
-  font-family: verdana;
-  border-radius: 45px;
+/* Navbar styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 20px;
-  width: 650px;
-  height: 135px;
-  margin-left: auto; margin-right: auto;
-  margin-top: 100px;
-  font-size: 20px;
-  font-weight: bold;
+  position: absolute; /* To position it at the top */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
 }
 
-body {
-  background: linear-gradient(to left, rgb(182, 244, 146), rgb(51, 139, 147));
+.navbar nav {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
 
-.Login{
-  margin-top: 100px;
-  padding: 10px;
-  background: rgba(12, 15, 184, 0.15);
-  border-radius: 45px;
-  
-}
-
-button{
-  border-radius: 45px;
-  border: none;
-  font-family: verdana;
+/* Links styling */
+.navbar a {
+  margin-left: 20px;
+  font-size: 18px;
+  text-decoration: none;
   color: white;
-  background-color: rgb(241, 169, 75);
-  padding: 10px;
-  width: 100px;
   font-weight: bold;
 }
 
-button:hover{
-  background-color: rgb(255, 146, 3);
-  padding: 11px;
-  width: 105px;
+.navbar a:hover {
+  color: #f0a500; /* Change link color on hover */
 }
 
-button:visited{
-  background-color: rgb(255, 255, 255);
-  color: rgb(157, 117, 237);
-}
-
-button:active{
-  background-color: rgb(223, 94, 2);
-  color: rgb(255, 224, 209);
-}
-
-input{
-  border-radius: 45px;
-  border: none;
-  padding: 10px;
+/* Additional styling for login link to float right */
+.login-link {
   margin-right: 20px;
 }
-*/
+

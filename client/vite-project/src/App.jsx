@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Route, Routes, Link, Navigate } from 'react-router-dom';
-import HomePage from './HomePage';
 import Login from './Login';
 import Booking from './Booking';
 import './App.css';
+import HomePage from './HomePage';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // To track login state
@@ -14,10 +14,12 @@ function App() {
 
   return (
     <div className="App">
-      <nav>
-        <Link to="/">Home</Link>
-        {!isLoggedIn && <Link to="/login" style={{ float: 'right' }}>Login</Link>}
-      </nav>
+      <header className="navbar">
+        <nav>
+          <Link to="/">Home</Link>
+          {!isLoggedIn && <Link to="/login" className="login-link">Login</Link>}
+        </nav>
+      </header>
 
       <Routes>
         <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />

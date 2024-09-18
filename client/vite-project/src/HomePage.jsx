@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './HomePage.css';
 
 function HomePage({ isLoggedIn }) {
   return (
-    <div>
+    <div className="homepage-container">
       <h1>Welcome to the HomePage</h1>
       {isLoggedIn ? (
         <Link to="/booking">
