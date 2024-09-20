@@ -6,12 +6,29 @@ function Booking() {
   const [destination, setDestination] = useState('');
   const [flightDate, setFlightDate] = useState('');
   const [flights, setFlights] = useState([]);
+  const [noFlightsMessage, setNoFlightsMessage] = useState('');
+
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return d.toISOString().split('T')[0]; // Returns date in YYYY-MM-DD format
+  };
 
   const searchFlights = async () => {
     try {
       const response = await axios.get('http://localhost:3001/api/flights', {
-        params: { startPoint, destination, flightDate },
+        params: { 
+          startPoint, 
+          destination, 
+          flightDate: formatDate(flightDate) 
+        },
       });
+
+      if (response.data.length === 0) {
+        setNoFlightsMessage('No flights available during this time');
+      } else {
+        setNoFlightsMessage(''); // Clear message if flights are found
+      }
+      console.log(response.data); 
       setFlights(response.data);
     } catch (error) {
       console.error('Error fetching flights', error);
@@ -43,6 +60,8 @@ function Booking() {
         <button onClick={searchFlights}>Search Flights</button>
       </div>
 
+      {noFlightsMessage && <p>{noFlightsMessage}</p>} {/* Display the "no flights" message */}
+      
       {flights.length > 0 && (
         <div>
           <h2>Available Flights</h2>
