@@ -17,7 +17,7 @@ function App() {
       <header className="navbar">
         <nav>
           <Link to="/">Home</Link>
-          {!isLoggedIn && <Link to="/login" className="login-link">Login</Link>}
+          {!isLoggedIn && <Link to="/login" className="login-link" style={{ float: 'right' }}>Login</Link>}
         </nav>
       </header>
 
