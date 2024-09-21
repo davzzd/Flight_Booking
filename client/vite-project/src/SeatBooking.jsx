@@ -14,6 +14,7 @@ function SeatBooking() {
     const fetchSeats = async () => {
       try {
         const response = await axios.get(`http://localhost:3001/api/seats/${flightId}`);
+        console.log(response.data);
         setSeats(response.data);
       } catch (error) {
         console.error('Error fetching seat data', error);
