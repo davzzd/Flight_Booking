@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Booking() {
   const [startPoint, setStartPoint] = useState('');
@@ -7,6 +8,7 @@ function Booking() {
   const [flightDate, setFlightDate] = useState('');
   const [flights, setFlights] = useState([]);
   const [noFlightsMessage, setNoFlightsMessage] = useState('');
+  const navigate = useNavigate();
 
   const formatDate = (date) => {
     const d = new Date(date);
@@ -34,6 +36,11 @@ function Booking() {
       console.error('Error fetching flights', error);
       alert('Failed to fetch flights');
     }
+  };
+
+  const bookFlight = (flightId) => {
+    // Redirect to seat booking page with flightId as a query parameter
+    navigate(`/seat-booking?flightId=${flightId}`);
   };
 
   return (
@@ -69,7 +76,7 @@ function Booking() {
             {flights.map((flight) => (
               <li key={flight.id}>
                 Flight {flight.flightNumber} from {flight.startPoint} to {flight.destination} on {flight.flightDate}
-                <button>Book</button>
+                <button onClick={() => bookFlight(flight.id)}>Book</button>
               </li>
             ))}
           </ul>
