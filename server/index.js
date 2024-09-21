@@ -14,7 +14,7 @@ app.use(express.json());
 // Register routes
 app.use('/api', userRoutes); // If needed, add /api prefix for clarity
 app.use('/api', flightRoutes); // '/api/flights' is already correct here
-app.use('/api', seatRoutes); // '/api/seats' for fetching seats
+app.use('/api/seats', seatRoutes); // '/api/seats' for fetching seats
 
 db.sequelize.sync().then(async () => {
   app.listen(3001, async () => {
