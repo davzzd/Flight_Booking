@@ -1,24 +1,35 @@
-/* App.css or SeatBooking.css */
-.seat-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+.seat-booking-container {
+    text-align: center;
+  }
+  
+  .seat-map {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
-    margin-top: 20px;
+    margin: 20px 0;
   }
   
   .seat {
     padding: 10px;
-    border-radius: 5px;
-    background-color: #eee;
+    border: 1px solid #000;
+    background-color: lightgray;
     cursor: pointer;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .seat.selected {
+    background-color: green;
+    color: white;
   }
   
   .seat.booked {
     background-color: red;
     cursor: not-allowed;
-  }
-  
-  .seat:not(.booked):hover {
-    background-color: lightgreen;
+    color: white;
   }
   
