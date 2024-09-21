@@ -1,87 +1,32 @@
 const express = require('express');
 const cors = require('cors');
 const db = require('./models');
-const userRoutes = require('./routes/userRoutes'); // Import the routes
-
+const userRoutes = require('./routes/userRoutes');
+const flightRoutes = require('./routes/flightRoutes');
+const seatRoutes = require('./routes/seatRoutes');
 const app = express();
+const axios = require('axios');
+
+
 app.use(cors());
 app.use(express.json());
 
-// Use the routes
-app.use('/api', userRoutes);
+// Register routes
+app.use('/api', userRoutes); // If needed, add /api prefix for clarity
+app.use('/api', flightRoutes); // '/api/flights' is already correct here
+app.use('/api/seats', seatRoutes); // '/api/seats' for fetching seats
 
-db.sequelize.sync().then(() => {
-  app.listen(3001, () => {
+db.sequelize.sync().then(async () => {
+  app.listen(3001, async () => {
     console.log("Server is running on port 3001");
+
+    // Check if there are any flights in the database
+    const flightCount = await db.Flight.count();
+    if (flightCount === 0) {
+      console.log("No flights found, generating random flights...");
+      // Generate 10 random flights on startup
+      await axios.post('http://localhost:3001/api/generateRandomFlights', { numFlights: 10 });
+      console.log("Random flights created.");
+    }
   });
 });
-
-/*
-const express = require("express");
-const cors = require("cors");
-const bcrypt = require("bcrypt"); // For password hashing
-const db = require("./models");
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-// Register a new user
-app.post("/api/register", async (req, res) => {
-  const { username, password, firstName, lastName, country } = req.body;
-
-  try {
-    // Check if user already exists
-    const existingUser = await db.User.findOne({ where: { username } });
-    if (existingUser) {
-      return res.status(400).json({ message: "Username already taken" });
-    }
-
-    // Hash password before saving
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create new user
-    const newUser = await db.User.create({
-      username,
-      password: hashedPassword,
-      firstName,
-      lastName,
-      country,
-    });
-    res.status(201).json({ message: "User created successfully", user: newUser });
-  } catch (error) {
-    console.error("Error during registration:", error);  // Log the actual error
-    res.status(500).json({ message: "Server error, please try again", error: error.message });
-  }
-});
-
-// Login user
-app.post("/api/login", async (req, res) => {
-  const { username, password } = req.body;
-
-  try {
-    // Check if user exists
-    const user = await db.User.findOne({ where: { username } });
-    if (!user) {
-      return res.status(400).json({ message: "User not found" });
-    }
-
-    // Compare the passwords
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      return res.status(400).json({ message: "Invalid password" });
-    }
-
-    res.status(200).json({ message: "Login successful", user });
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
-  }
-});
-
-// Sync DB and start server
-db.sequelize.sync().then(() => {
-  app.listen(3001, () => {
-    console.log("Server is running on port 3001");
-  });
-});
-*/

@@ -1,0 +1,35 @@
+.seat-booking-container {
+    text-align: center;
+  }
+  
+  .seat-map {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .seat {
+    padding: 10px;
+    border: 1px solid #000;
+    background-color: lightgray;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .seat.selected {
+    background-color: green;
+    color: white;
+  }
+  
+  .seat.booked {
+    background-color: red;
+    cursor: not-allowed;
+    color: white;
+  }
+  
