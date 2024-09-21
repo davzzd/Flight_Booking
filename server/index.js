@@ -3,14 +3,17 @@ const cors = require('cors');
 const db = require('./models');
 const userRoutes = require('./routes/userRoutes'); // Import the routes
 const flightRoutes = require('./routes/flightRoutes');
-
+const seatRoutes = require('./routes/seatRoutes');
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
 // Use the routes
 app.use('/api', userRoutes);
 app.use('/api', flightRoutes);
+//app.use('/api/seats', seatRoutes);
+
 
 db.sequelize.sync().then(() => {
   app.listen(3001, () => {

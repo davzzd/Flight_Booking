@@ -1,57 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import './SeatBooking.css';
 
 function SeatBooking() {
+  const [seats, setSeats] = useState([]);
   const [selectedSeat, setSelectedSeat] = useState(null);
-  const [seats, setSeats] = useState([]); // Seat availability data from backend
+  const [searchParams] = useSearchParams();
+  const flightId = searchParams.get('flightId');
   const navigate = useNavigate();
-  const location = useLocation();
-  const flightId = new URLSearchParams(location.search).get('flightId'); // Get flight ID from query
 
   useEffect(() => {
-    // Fetch seat availability for the flight
     const fetchSeats = async () => {
       try {
         const response = await axios.get(`http://localhost:3001/api/seats/${flightId}`);
-        console.log(response.data);
         setSeats(response.data);
       } catch (error) {
         console.error('Error fetching seat data', error);
       }
     };
-
     fetchSeats();
   }, [flightId]);
 
-  const handleSeatSelection = (seat) => {
-    setSelectedSeat(seat);
+  const handleSeatSelection = (seatId) => {
+    setSelectedSeat(seatId);
   };
 
-  const proceedToPayment = () => {
-    if (selectedSeat) {
-      navigate(`/payment?seatId=${selectedSeat.id}&flightId=${flightId}`);
-    } else {
-      alert('Please select a seat before proceeding.');
+  const handleNext = async () => {
+    if (!selectedSeat) {
+      alert('Please select a seat');
+      return;
+    }
+
+    try {
+      await axios.post('http://localhost:3001/api/seats/book', { seatId: selectedSeat });
+      navigate('/payment'); // Navigate to payment page
+    } catch (error) {
+      alert('Error booking seat');
     }
   };
 
   return (
-    <div className="seat-booking-container">
-      <h2>Select a Seat</h2>
-      <div className="seats-grid">
+    <div>
+      <h1>Select a Seat</h1>
+      <div className="seat-grid">
         {seats.map((seat) => (
           <button
             key={seat.id}
-            className={`seat ${seat.isAvailable ? 'available' : 'unavailable'}`}
-            onClick={() => seat.isAvailable && handleSeatSelection(seat)}
-            disabled={!seat.isAvailable}
+            className={`seat ${seat.isBooked ? 'booked' : ''}`}
+            disabled={seat.isBooked}
+            onClick={() => handleSeatSelection(seat.id)}
           >
-            {seat.seatNumber} ({seat.classType})
+            {seat.seatNumber} ({seat.seatClass})
           </button>
         ))}
       </div>
-      <button onClick={proceedToPayment} disabled={!selectedSeat}>Next</button>
+      <button onClick={handleNext}>Next</button>
     </div>
   );
 }
