@@ -1,28 +1,38 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Aligns content towards the top */
+    align-items: center; /* Centers horizontally */
+    height: 100vh; /* Full viewport height */
+}
 /* Container for the entire booking section */
 .booking-container {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 1000px;
+    
     padding: 20px;
-    font-family: Arial, sans-serif;
   }
   
   h1 {
-    text-align: center;
-    color: #333;
+    font-size: 2.5rem;
     margin-bottom: 20px;
   }
   
   /* Container for the search form */
   .search-bar {
+    
     display: flex;
-    flex-direction: column;
-    gap: 20px; /* Adds space between each input field */
-    margin-bottom: 30px; /* Space between search inputs and results */
+    justify-content: space-between;
+    align-items: center;
+    flex: auto;
+    margin-bottom: 30px;
+    width: max-content;
+   
+    gap: 20px;
   }
   
   input {
     padding: 12px;
-    font-size: 16px;
+    font-size: 80px;
     border: 1px solid #ddd;
     border-radius: 5px;
     width: 100%;
@@ -30,15 +40,22 @@
   }
   
   input[type="date"] {
-    padding: 12px;
+    min-width: min-content;
     font-size: 16px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 25px;
+
   }
   
   /* Styling the datalist dropdowns */
   datalist {
     border: 1px solid #ddd;
+  }
+
+  .search-button{
+    margin-bottom: 30px;
+    margin-left: 20px;
+    padding: 15px;
   }
   
   button {
@@ -61,6 +78,12 @@
   }
   
   li {
+    margin-bottom: 15px;
+    border-radius: 5px;
+    padding: 20px;
+    width: 700px;
+    background-color: rgb(255, 255, 255);
+    color: black;
     padding: 12px;
     border-bottom: 1px solid #ddd;
     display: flex;
@@ -116,6 +139,7 @@
   }
   
   input.dropdown-input {
+    background-color: white;
     width: 100%;
     padding-right: 30px; /* Make space for the flight icon */
   }
@@ -129,4 +153,3 @@
     color: #007bff;
     font-size: 18px;
   }
-  
