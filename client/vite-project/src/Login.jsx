@@ -48,7 +48,7 @@ const Login = ({ onLogin }) => {
         username,
         password,
       });
-      alert(res.data.message);
+     // alert(res.data.message);
 
       if (res.status === 200) {
         onLogin();  // Update the login state in App component
