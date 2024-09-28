@@ -2,7 +2,6 @@ const express = require('express');
 const { Seat } = require('../models');
 const router = express.Router();
 
-// Define a function to take io and return a router
 module.exports = (io) => {
   // Fetch seats for a flight
   router.get('/:flightId', async (req, res) => {
@@ -23,40 +22,49 @@ module.exports = (io) => {
     }
   });
 
+  // Book multiple seats
   router.post('/book', async (req, res) => {
-    const { seatId } = req.body; // Make sure seatId is being passed correctly
-    console.log('Seat ID from request body:', seatId);
+    const { seatIds } = req.body; // Expect an array of seatIds
+    console.log('Seat IDs from request body:', seatIds);
 
     try {
-      const seat = await Seat.findByPk(seatId); // Find the seat by its ID
-      if (!seat) {
-        return res.status(404).json({ error: 'Seat not found' });
+      const seats = await Seat.findAll({ where: { id: seatIds } }); // Find seats by their IDs
+
+      // Check if any seat is already booked
+      const alreadyBookedSeats = seats.filter(seat => seat.isBooked);
+      if (alreadyBookedSeats.length > 0) {
+        return res.status(400).json({
+          error: 'Some seats are already booked',
+          bookedSeats: alreadyBookedSeats.map(seat => seat.id),
+        });
       }
-      
-      if (seat.isBooked) {
-        return res.status(400).json({ error: 'Seat already booked' });
+
+      // Mark all selected seats as booked
+      for (let seat of seats) {
+        seat.isBooked = true;
+        await seat.save();
       }
-  
-      // Mark the seat as booked
-      seat.isBooked = true;
-      await seat.save();
-      console.log('Seat booked successfully:', seatId);
-  
+      console.log('Seats booked successfully:', seatIds);
+
       // Emit the updated seat data for real-time updates
-      const updatedSeats = await Seat.findAll({ where: { flightId: seat.flightId } });
+      const updatedSeats = await Seat.findAll({ where: { flightId: seats[0].flightId } });
       const ioInstance = req.app.get('socketio'); // Get Socket.io instance from the app
       if (ioInstance) {
         ioInstance.emit('seatUpdate', updatedSeats); // Broadcast real-time seat updates
       } else {
         console.error('Socket.io instance is not available.');
       }
-  
-      res.json({ success: 'Seat booked successfully' });
+
+      res.json({ success: 'Seats booked successfully', seatIds });
     } catch (error) {
-      console.error('Error booking seat:', error);
-      res.status(500).json({ error: 'Failed to book seat', details: error.message });
+      console.error('Error booking seats:', error);
+      res.status(500).json({ error: 'Failed to book seats', details: error.message });
     }
   });
+
+  return router;
+};
+
 /*
  // Book a seat and notify all clients
 router.post('/book', async (req, res) => {
@@ -91,10 +99,6 @@ router.post('/book', async (req, res) => {
     }
   });
 */
-  return router;
-};
-
-
 /*
 // routes/seatRoutes.js
 const express = require('express');

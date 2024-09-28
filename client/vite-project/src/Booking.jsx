@@ -126,9 +126,9 @@ function Booking() {
       {flights.length > 0 && (
         <div className='flight-list'>
           <h2>Available Flights</h2>
-          <ul>
+          <ul className='ul'>
             {flights.map((flight) => (
-              <li key={flight.id}>
+              <li className='li' key={flight.id}>
                 Flight {flight.flightNumber} from {flight.startPoint} to {flight.destination} on {flight.flightDate}
                 <button className="book-button" onClick={() => bookFlight(flight.id)}>Book</button>
               </li>

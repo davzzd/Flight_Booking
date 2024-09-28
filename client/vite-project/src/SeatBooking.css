@@ -49,3 +49,7 @@
   .seat a:hover {
     color: #4507ff; /* Change link color on hover */
   }
+
+  .seat:hover:not(.booked) {
+    background-color: #5bc0de;
+  }
