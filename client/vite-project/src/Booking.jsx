@@ -74,7 +74,7 @@ function Booking() {
 
   return (
     <div className="booking-container">
-      <h1>Search for Flights</h1>
+      <h1 className='h1'>Search for Flights</h1>
       <div className="search-bar">
         <div className="input-container">
           <input
@@ -124,7 +124,7 @@ function Booking() {
       {noFlightsMessage && <p>{noFlightsMessage}</p>}
 
       {flights.length > 0 && (
-        <div>
+        <div className='flight-list'>
           <h2>Available Flights</h2>
           <ul>
             {flights.map((flight) => (

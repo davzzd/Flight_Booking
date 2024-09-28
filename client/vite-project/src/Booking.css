@@ -1,155 +1,150 @@
-.body{
+  .booking-container {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Aligns content towards the top */
+    justify-content: flex-start;/* Aligns content towards the top */
     align-items: center; /* Centers horizontally */
     height: 100vh; /* Full viewport height */
-}
-/* Container for the entire booking section */
-.booking-container {
-    max-width: 1000px;
-    
     padding: 20px;
   }
-  
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-  }
-  
-  /* Container for the search form */
-  .search-bar {
     
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex: auto;
-    margin-bottom: 30px;
-    width: max-content;
-   
-    gap: 20px;
-  }
+    .h1 {
+      margin-top: 80px;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    
+    /* Container for the search form */
+    .search-bar {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items:flex-start;
+      margin-bottom: 30px;
+      width: max-content;
+      gap: 50px;
+    }
+    
+    input[type="date"] {
+      min-width: min-content;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 25px;
   
-  input {
-    padding: 12px;
-    font-size: 80px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box; /* Ensures the input stays inside its container */
-  }
+    }
+    
+    /* Styling the datalist dropdowns */
+    datalist {
+      border: 1px solid #ddd;
+    }
   
-  input[type="date"] {
-    min-width: min-content;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 25px;
+    .search-button{
+      margin-top: 10px;
+      background-color: #ff8000;
+      color: white;
+      margin-bottom: 30px;
+      margin-left: 20px;
+      padding: 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .search-button:hover {
+      background-color: #ff5e00;
+    }
+  
+    .book-button {
+      background-color: #ffa600;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .book-button:hover {
+      background-color: #f35613;
+    }
+  
+    /* Styles for the results list (flights list) */
+    ul {
+      list-style-type: none;
+      padding: 0;
+      
+    }
+    
+    li {
+      margin-bottom: 15px;
+      border-radius: 15px;
+      padding: 20px;
+      width: 700px;
+      background-color: rgb(255, 255, 255);
+      color: rgb(255, 255, 255);
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.2); /* Translucent background */
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+      backdrop-filter: blur(10px); /* For a blurred glass-like effect */
+      -webkit-backdrop-filter: blur(10px); /* For Safari support */
+       border: 1px solid rgba(255, 255, 255, 0.3); /* Optional: subtle border */
+    }
 
-  }
-  
-  /* Styling the datalist dropdowns */
-  datalist {
-    border: 1px solid #ddd;
-  }
-
-  .search-button{
-    margin-bottom: 30px;
-    margin-left: 20px;
-    padding: 15px;
-  }
-  
-  button {
-    background-color: #007bff;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Styles for the results list (flights list) */
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    margin-bottom: 15px;
-    border-radius: 5px;
-    padding: 20px;
-    width: 700px;
-    background-color: rgb(255, 255, 255);
-    color: black;
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  li:last-child {
-    border-bottom: none;
-  }
-  
-  .book-button {
-    background-color: #28a745;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .book-button:hover {
-    background-color: #218838;
-  }
-  
-  /* Custom styling for the dropdown list */
-  .dropdown-list {
-    max-height: 150px; /* Limit the height of the dropdown list */
-    overflow-y: auto;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .dropdown-list li {
-    padding: 8px;
-    cursor: pointer;
-  }
-  
-  .dropdown-list li:hover {
-    background-color: #f0f0f0;
-  }
-  
-  .dropdown-list i {
-    margin-right: 10px;
-    color: #007bff;
-  }
-  
-  /* Ensures each input field is clearly separated from the others */
-  .input-container {
-    margin-bottom: 20px;
-    position: relative;
-  }
-  
-  input.dropdown-input {
-    background-color: white;
-    width: 100%;
-    padding-right: 30px; /* Make space for the flight icon */
-  }
-  
-  /* Adding the flight icon inside the input field */
-  .input-container i {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    color: #007bff;
-    font-size: 18px;
-  }
+    .flight-list{
+      padding: 30px;
+      border-radius: 15px;
+      background-image: linear-gradient(to top, #0099e0 0%, #2b40ff 100%);
+    }
+    
+    li:last-child {
+      border-bottom: none;
+    }
+    
+    /* Custom styling for the dropdown list */
+    .dropdown-list {
+      max-height: 150px; /* Limit the height of the dropdown list */
+      overflow-y: auto;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .dropdown-list li {
+      padding: 8px;
+      cursor: pointer;
+    }
+    
+    .dropdown-list li:hover {
+      background-color: #f0f0f0;
+    }
+    
+    .dropdown-list i {
+      margin-right: 10px;
+      color: #007bff;
+    }
+    
+    /* Ensures each input field is clearly separated from the others */
+    .input-container {
+      margin-bottom: 20px;
+      position: relative;
+    }
+    
+    input.dropdown-input {
+      font-size: 16px;
+      background-color: white;
+      width: 100%;
+      padding-right: 30px; /* Make space for the flight icon */
+    }
+    
+    /* Adding the flight icon inside the input field */
+    .input-container i {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      color: #007bff;
+      font-size: 18px;
+    }
