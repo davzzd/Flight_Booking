@@ -42,10 +42,10 @@
       background-color: #ff8000;
       color: white;
       margin-bottom: 30px;
-      margin-left: 20px;
-      padding: 15px;
+      margin-left: -35px;
+      padding: 14px;
       border: none;
-      border-radius: 5px;
+      border-radius: 20px;
       cursor: pointer;
     }
     
@@ -101,7 +101,7 @@
     li:last-child {
       border-bottom: none;
     }
-    
+
     /* Custom styling for the dropdown list */
     .dropdown-list {
       max-height: 150px; /* Limit the height of the dropdown list */
