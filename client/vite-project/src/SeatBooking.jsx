@@ -69,7 +69,7 @@ function SeatBooking() {
 
   return (
     <div className="seat-booking-container">
-      <h1>Select a seat</h1>
+      <h1 className='heading'>Select a seat</h1>
       <div className="seat-map">
         {seats.length > 0 ? (
           seats.map((seat) => (
@@ -79,7 +79,7 @@ function SeatBooking() {
               onClick={() => handleSeatSelect(seat)}
               disabled={seat.isBooked}
             >
-              {seat.seatNumber} ({seat.seatClass})
+              {seat.seatNumber} {/*({seat.seatClass})*/}
             </button>
           ))
         ) : (

@@ -6,6 +6,7 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     color: white;   /* Adjust text color based on your image */
+    background-color: rgba(155, 206, 250, 0.5);
 }
 
 /* General styling */

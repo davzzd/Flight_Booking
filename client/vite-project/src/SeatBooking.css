@@ -1,5 +1,12 @@
 .seat-booking-container {
     text-align: center;
+    margin-top: 0px;
+    background: rgba(255, 255, 255, 0.2); /* Translucent background */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    backdrop-filter: blur(10px); /* For a blurred glass-like effect */
+    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+     border: 1px solid rgba(255, 255, 255, 0.3); /* Optional: subtle border */
+     border-radius: 15px;
   }
   
   .seat-map {
@@ -12,24 +19,33 @@
   
   .seat {
     padding: 10px;
-    border: 1px solid #000;
+    border: 1px solid #00008a;
+    border-radius: 5px;
     background-color: lightgray;
     cursor: pointer;
     width: 60px;
-    height: 60px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
   .seat.selected {
-    background-color: green;
+    background-color: rgb(21, 164, 121);
     color: white;
   }
   
   .seat.booked {
-    background-color: red;
+    background-color: rgb(49, 26, 63);
     cursor: not-allowed;
     color: white;
   }
   
+  .heading{
+    margin-bottom: 0px;
+    margin-top: 90px;
+  }
+
+  .seat a:hover {
+    color: #4507ff; /* Change link color on hover */
+  }

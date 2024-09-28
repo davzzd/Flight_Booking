@@ -116,9 +116,9 @@ router.post('/generateRandomFlights', async (req, res) => {
                 flightDate
             });
   
-            // Generate seats (example: 100 economy, 20 business, 10 first class)
+            // Generate seats (example: 50 economy, 20 business, 10 first class)
             const seats = [];
-            for (let i = 1; i <= 100; i++) {
+            for (let i = 1; i <= 50; i++) {
                 seats.push({ seatNumber: `E${i}`, seatClass: 'economy', flightId: newFlight.id });
             }
             for (let i = 1; i <= 20; i++) {
