@@ -40,26 +40,30 @@ const Login = ({ onLogin }) => {
     }
   };
 
-  // Handle Login
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post("http://localhost:3001/api/login", {
-        username,
+        username: username.toLowerCase(), // ensure username is normalized
         password,
       });
-     // alert(res.data.message);
-
+  
       if (res.status === 200) {
-        onLogin();  // Update the login state in App component
-        navigate("/booking");  // Redirect to booking page after successful login
+        const { username } = res.data;
+  
+        // Log username to confirm it's being received properly
+        console.log("Login successful, username:", username);
+
+        localStorage.setItem("username",username.toLowerCase()); // store in lowercase
+        onLogin();
+        navigate("/booking"); // Navigate to booking page
       }
     } catch (error) {
       console.error("Login error:", error);
       alert("Login failed, please check your credentials.");
     }
   };
-
+  
   return (
     <div className={styles.Register}>
       <h1>{isLogin ? "Login" : "Register"}</h1>
@@ -115,5 +119,3 @@ const Login = ({ onLogin }) => {
 };
 
 export default Login;
-
-

@@ -1,20 +1,18 @@
+// routes/seatRoutes.js
 const express = require('express');
-const { Seat } = require('../models');
+const { Seat, Booking } = require('../models');
 const router = express.Router();
 
 module.exports = (io) => {
-  // Fetch seats for a flight
+  // Fetch seats by flightId
   router.get('/:flightId', async (req, res) => {
     const { flightId } = req.params;
-    console.log(`Fetching seats for flight: ${flightId}`);
-
     try {
       const seats = await Seat.findAll({ where: { flightId } });
-
-      if (seats.length === 0) {
+      if (!seats || seats.length === 0) {
         return res.status(404).json({ error: 'No seats found for this flight' });
       }
-
+  
       res.json(seats);
     } catch (error) {
       console.error('Error fetching seats:', error);
@@ -22,13 +20,20 @@ module.exports = (io) => {
     }
   });
 
-  // Book multiple seats
+  // Book seats and handle username correctly
   router.post('/book', async (req, res) => {
-    const { seatIds } = req.body; // Expect an array of seatIds
-    console.log('Seat IDs from request body:', seatIds);
-
+    const { seatIds, username, flightId } = req.body;
+  
     try {
-      const seats = await Seat.findAll({ where: { id: seatIds } }); // Find seats by their IDs
+      if (!username) {
+        return res.status(400).json({ error: 'Username is required' });
+      }
+
+      // Normalize the username
+      const normalizedUsername = username.toLowerCase(); 
+  
+      // Find the seats to book
+      const seats = await Seat.findAll({ where: { id: seatIds } });
 
       // Check if any seat is already booked
       const alreadyBookedSeats = seats.filter(seat => seat.isBooked);
@@ -38,26 +43,31 @@ module.exports = (io) => {
           bookedSeats: alreadyBookedSeats.map(seat => seat.id),
         });
       }
-
-      // Mark all selected seats as booked
+  
+      // Book the selected seats and create bookings
       for (let seat of seats) {
         seat.isBooked = true;
         await seat.save();
+  
+        // Generate random gate number
+        const gate = String.fromCharCode(65 + Math.floor(Math.random() * 26)) + (Math.floor(Math.random() * 90) + 10);
+  
+        // Create the booking
+        await Booking.create({
+          username: normalizedUsername,  // Use normalized username
+          flightId,
+          seatId: seat.id,
+          gateNumber: gate,
+        });
       }
-      console.log('Seats booked successfully:', seatIds);
-
-      // Emit the updated seat data for real-time updates
-      const updatedSeats = await Seat.findAll({ where: { flightId: seats[0].flightId } });
-      const ioInstance = req.app.get('socketio'); // Get Socket.io instance from the app
-      if (ioInstance) {
-        ioInstance.emit('seatUpdate', updatedSeats); // Broadcast real-time seat updates
-      } else {
-        console.error('Socket.io instance is not available.');
-      }
-
+  
+      // Emit real-time seat updates to all connected clients
+      const updatedSeats = await Seat.findAll({ where: { flightId } });
+      io.emit('seatUpdate', updatedSeats);
+  
       res.json({ success: 'Seats booked successfully', seatIds });
     } catch (error) {
-      console.error('Error booking seats:', error);
+      console.error('Error booking seats:', error.message);
       res.status(500).json({ error: 'Failed to book seats', details: error.message });
     }
   });

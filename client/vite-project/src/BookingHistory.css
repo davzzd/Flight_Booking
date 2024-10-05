@@ -1,0 +1,31 @@
+.booking-history-container {
+    padding: 20px;
+  }
+  
+  .ticket {
+    border: 2px solid #007BFF;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    max-width: 500px;
+    display: flex;
+    justify-content: space-between;
+    color: rgb(46, 37, 37);
+  }
+  
+  .ticket-details {
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .ticket-details h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #007BFF;
+  }
+  
+  .ticket-details p {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+  
