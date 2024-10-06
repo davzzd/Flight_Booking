@@ -94,3 +94,23 @@
     }
   }
   
+
+  .loader {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-left-color: #fff; /* Change this to your preferred color */
+    border-radius: 50%;
+    width: 20px;  /* Size of the loader */
+    height: 20px; /* Size of the loader */
+    animation: spin 1s linear infinite; /* Animation properties */
+  }
+  
+  /* Spin Animation */
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
