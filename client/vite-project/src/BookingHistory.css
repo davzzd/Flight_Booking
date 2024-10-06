@@ -9,7 +9,10 @@
   border-radius: 10px;
   width: 500px;
   margin: 20px 0;
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
@@ -20,6 +23,8 @@
 .ticket-section {
   display: flex;
   justify-content: space-between;
+  border-top: 10px solid blue;
+  border-bottom: 10px solid blue;
 }
 
 .ticket-left, .ticket-right {
@@ -105,4 +110,22 @@ h2 {
 .ticket-left p, .ticket-right p {
   margin: 0; /* Remove margin for paragraphs to avoid extra space */
   flex-basis: 70%; /* Adjust this to control width of answers */
+}
+
+.bookingTitle{
+  color: rgb(255, 229, 192);
+}
+
+
+.label2 {
+  font-weight: bold;
+  margin-right: 10px; /* Space between label and answer */
+  flex-basis: 30%; /* Adjust this to control width of labels */
+  color: #2c85ac;
+}
+
+.tag2 {
+  margin: 0; /* Space between label and answer */
+  flex-basis: 70%; /* Adjust this to control width of labels */
+  color: #2c85ac;
 }
