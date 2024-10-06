@@ -24,30 +24,34 @@ router.get('/booking-history/:username', async (req, res) => {
     const bookings = await Booking.findAll({
       where: { username },
       include: [
-        {
-          model: Seat,  // Fetch Seat data through BookingSeats association
-          attributes: ['seatNumber', 'seatClass', 'isBooked'],
-          through: {
-            model: BookingSeats,
-            attributes: []  // No need to fetch extra fields from the junction table
-          }
-        },
-        {
-          model: Flight,  // Fetch Flight data
-          attributes: ['id', 'flightNumber'],
-        },
-      ]
+        { model: Seat, as: 'Seats' },
+        { model: Flight, as: 'Flight' }, // Include flight details
+      ],
     });
 
-    if (bookings.length === 0) {
-      return res.status(404).json({ error: 'No bookings found for this user' });
-    }
-    res.json(bookings);
+    const bookingHistory = bookings.map((booking) => ({
+      id: booking.id,
+      flightId: booking.Flight.flightNumber,
+      gateNumber: booking.gateNumber,
+      seats: booking.Seats.map(seat => seat.seatNumber),
+      flightFrom: booking.Flight.startPoint,  // Assuming startPoint is the column for the "From" location
+      flightTo: booking.Flight.destination,   // Assuming destination is the column for the "To" location
+      date: booking.Flight.date,  // Flight date
+      boardingTime: generateRandomBoardingTime(),  // Generate random boarding time
+    }));
+
+    res.json(bookingHistory);
   } catch (error) {
     console.error('Error fetching booking history:', error);
     res.status(500).json({ error: 'Failed to fetch booking history' });
   }
 });
+
+function generateRandomBoardingTime() {
+  const hours = Math.floor(Math.random() * 24).toString().padStart(2, '0');
+  const minutes = Math.floor(Math.random() * 60).toString().padStart(2, '0');
+  return `${hours}:${minutes}`;
+}
 
 
 
