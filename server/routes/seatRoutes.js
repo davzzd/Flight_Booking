@@ -1,6 +1,6 @@
 // routes/seatRoutes.js
 const express = require('express');
-const { Seat, Booking } = require('../models');
+const { Seat, Booking, BookingSeats, sequelize } = require('../models');
 const router = express.Router();
 
 module.exports = (io) => {
@@ -28,13 +28,13 @@ module.exports = (io) => {
       if (!username) {
         return res.status(400).json({ error: 'Username is required' });
       }
-
+  
       // Normalize the username
-      const normalizedUsername = username.toLowerCase(); 
+      const normalizedUsername = username.toLowerCase();
   
       // Find the seats to book
       const seats = await Seat.findAll({ where: { id: seatIds } });
-
+  
       // Check if any seat is already booked
       const alreadyBookedSeats = seats.filter(seat => seat.isBooked);
       if (alreadyBookedSeats.length > 0) {
@@ -44,33 +44,54 @@ module.exports = (io) => {
         });
       }
   
-      // Book the selected seats and create bookings
-      for (let seat of seats) {
-        seat.isBooked = true;
-        await seat.save();
+      // Start a transaction to ensure all or nothing is saved
+      const t = await sequelize.transaction();
   
-        // Generate random gate number
-        const gate = String.fromCharCode(65 + Math.floor(Math.random() * 26)) + (Math.floor(Math.random() * 90) + 10);
-  
-        // Create the booking
-        await Booking.create({
-          username: normalizedUsername,  // Use normalized username
+      try {
+        // Book the selected seats and create bookings
+        const booking = await Booking.create({
+          username: normalizedUsername,
           flightId,
-          seatId: seat.id,
-          gateNumber: gate,
-        });
+          gateNumber: generateRandomGateNumber(), // Random gate number
+        }, { transaction: t });
+  
+        // Create entries in BookingSeats table for each seat
+        for (let seat of seats) {
+          seat.isBooked = true;
+          await seat.save({ transaction: t });
+  
+          // Insert into BookingSeats
+          await BookingSeats.create({
+            bookingId: booking.id,  // Reference booking ID
+            seatId: seat.id,        // Reference seat ID
+          }, { transaction: t });
+        }
+  
+        // Commit the transaction
+        await t.commit();
+  
+        // Emit real-time seat updates to all connected clients
+        const updatedSeats = await Seat.findAll({ where: { flightId } });
+        io.emit('seatUpdate', updatedSeats);
+  
+        res.json({ success: 'Seats booked successfully', seatIds });
+      } catch (err) {
+        // Rollback the transaction in case of error
+        await t.rollback();
+        throw err;
       }
   
-      // Emit real-time seat updates to all connected clients
-      const updatedSeats = await Seat.findAll({ where: { flightId } });
-      io.emit('seatUpdate', updatedSeats);
-  
-      res.json({ success: 'Seats booked successfully', seatIds });
     } catch (error) {
       console.error('Error booking seats:', error.message);
       res.status(500).json({ error: 'Failed to book seats', details: error.message });
     }
   });
+  
+  // Helper function to generate random gate number
+  function generateRandomGateNumber() {
+    return String.fromCharCode(65 + Math.floor(Math.random() * 26)) + (Math.floor(Math.random() * 90) + 10);
+  }
+  
 
   return router;
 };
