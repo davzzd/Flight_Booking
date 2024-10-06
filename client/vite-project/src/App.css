@@ -1,12 +1,16 @@
 body{
   font-family: Verdana, sans-serif;
   height: 100vh;  /* Full viewport height */
-    background-image: url('./assets/background.jpg');  /* Path to your background image */
-    background-size: cover;   /* Ensures the image covers the full page */
-    background-position: center;
-    background-repeat: no-repeat;
-    color: white;   /* Adjust text color based on your image */
-    background-color: rgba(155, 206, 250, 0.5);
+  background-image: url('./assets/background.jpg');  /* Path to your background image */
+  background-size: cover;   /* Ensures the image covers the full page */
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;   /* Adjust text color based on your image */
+  background-color: rgba(155, 206, 250, 0.5);
+  overflow-y: auto; /* Allow vertical scrolling */
+  box-sizing: border-box;
+  margin: 0; /* Remove default body margin */
+  padding: 0; /* Ensure no padding */
 }
 
 /* General styling */

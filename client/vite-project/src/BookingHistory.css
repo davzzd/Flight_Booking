@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items:center;
+  margin-top: 300px;
 }
 
 .ticket {
@@ -129,3 +130,63 @@ h2 {
   flex-basis: 70%; /* Adjust this to control width of labels */
   color: #2c85ac;
 }
+
+
+/* Fullscreen enlarged ticket */
+/* Hover highlight */
+.ticket:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02); /* Slightly enlarge on hover */
+  cursor: pointer;
+}
+
+.ticket:hover:not(.ticket-fullscreen) {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02); /* Slightly enlarge on hover */
+  cursor: pointer;
+}
+
+/* Fullscreen enlarged ticket */
+.ticket-fullscreen {
+  position: fixed;
+  top: 30%;
+  left: 10%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  height: auto; /* Let the ticket's height adjust */
+  z-index: 9999; /* Bring it on top */
+  background-color: #fff;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.3);
+  overflow: auto; /* Allow scrolling within the ticket if it overflows */
+  padding: 20px;
+  border-radius: 10px;
+  /* Disable hover effects on fullscreen ticket */
+  transform: none !important;
+}
+
+/* Blur non-fullscreen tickets */
+.booking-history.blur-background .ticket:not(.ticket-fullscreen) {
+  filter: blur(5px);
+}
+
+/* Overlay to darken the background when a ticket is fullscreen */
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+  z-index: 9998; /* Below the fullscreen ticket */
+}
+
+/* Close button for the enlarged ticket */
+.ticket-close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10000; /* Make sure the close button is on top */
+}
+
