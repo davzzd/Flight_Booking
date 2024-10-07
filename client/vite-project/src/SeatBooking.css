@@ -11,7 +11,7 @@
   margin: 20px auto; /* Center the container and add space at the top */
   max-width: 1000px; /* Set a max width for better layout */
   min-height: 100vh; /* Ensure the container covers the viewport height */
-  margin-top: 700px;
+  margin-top: 350px;
 }
 
 .seat-map {
