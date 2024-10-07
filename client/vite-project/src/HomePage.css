@@ -13,22 +13,105 @@ body {
   }
   
   .homepage-container {
+    text-align: center;
+    padding: 50px 0;
+    position: relative;
+    margin-left: none;
+   
+  }
+  
+  .homepage-title {
+    font-size: 3.4em;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow:2px 2px #ff8800;
+    text-align: start;
+    margin-top: -40px;
+    padding-top: none;
+  }
+  
+  .smalltitle{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow:2px 2px #ff8800;
+    margin-top: -20px;
+    margin-bottom: 50px;
+    text-align: start;
+  }
+
+
+  .countries-container {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Aligns content towards the top */
-    align-items: center; /* Centers horizontally */
-    height: 100vh; /* Full viewport height */
-    padding-top: 20px; /* Add some padding from the top */
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 1070px;
   }
   
-  .homepage-container h1 {
-    font-size: 3rem;
-    margin-bottom: 5px;
+  .country-card {
+    position: relative;
+    flex: 1;
+    overflow:hidden;
+    height: 350px;
+ /*   width: 200px;  Split into two equal columns with spacing */
   }
   
-  .homepage-container p {
-    font-size: 1.5rem;
-    margin-bottom: 100px;
-    padding-top: 0%;
+  .country-image {
+    border-radius: 20px;
+    height: 100%;
+    object-fit: fill;
+    width: 340px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .country-card:hover .country-image {
+    transform: scale(1.1); /* Zoom on hover */
+    
+  }
+  
+  .hover-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .country-card:hover .hover-text {
+    opacity: 1;
+  }
+  
+  .butto {
+    padding: 10px 20px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .arrow {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    font-size: 3em;
+    color: #ff6600;
+    animation: bounce 1.5s infinite;
+    cursor: pointer;
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
   
