@@ -5,9 +5,10 @@ const { Server } = require('socket.io');
 const db = require('./models');
 const userRoutes = require('./routes/userRoutes');
 const flightRoutes = require('./routes/flightRoutes');
-const seatRoutes = require('./routes/seatRoutes'); // Import seatRoutes function
+const seatRoutes = require('./routes/SeatRoutes'); // Import seatRoutes function
 const app = express();
 const axios = require('axios');
+const bookingRoutes = require('./routes/bookingRoutes');
 
 const server = http.createServer(app);
 
@@ -29,6 +30,7 @@ app.use(express.json());
 app.use('/api', userRoutes); 
 app.use('/api', flightRoutes); 
 app.use('/api/seats', seatRoutes(io)); // Pass io to seatRoutes
+app.use('/api/bookings', bookingRoutes);
 
 // Handle Socket.io connections
 io.on('connection', (socket) => {

@@ -1,0 +1,192 @@
+.booking-history {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  margin-top: 300px;
+}
+
+.ticket {
+  border: 2px solid #2c85ac;
+  border-radius: 10px;
+  width: 500px;
+  margin: 20px 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  color: #000;
+  text-align: start;
+}
+
+.ticket-section {
+  display: flex;
+  justify-content: space-between;
+  border-top: 10px solid blue;
+  border-bottom: 10px solid blue;
+}
+
+.ticket-left, .ticket-right {
+  width: 45%;
+}
+
+.ticket-left p, .ticket-right p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.ticket-left {
+  border-right: 2px solid #e5e5e5;
+  padding-right: 20px;
+}
+
+.ticket-right {
+  padding-left: 20px;
+}
+
+.barcode {
+  width: 100%;
+  height: 50px;
+  background: repeating-linear-gradient(
+    90deg,
+    #000,
+    #000 2px,
+    #fff 2px,
+    #fff 4px
+  );
+  margin-top: 20px;
+}
+
+h2 {
+  color: #2c85ac;
+}
+
+@media screen and (max-width: 600px) {
+  .ticket {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .ticket-section {
+    flex-direction: column;
+  }
+
+  .ticket-left, .ticket-right {
+    width: 100%;
+    padding: 0;
+  }
+
+  .ticket-left {
+    border-right: none;
+    border-bottom: 2px solid #e5e5e5;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+
+  .ticket-right {
+    padding-top: 20px;
+  }
+}
+
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0; /* Add some margin for spacing */
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 10px; /* Space between label and answer */
+  flex-basis: 30%; /* Adjust this to control width of labels */
+}
+
+.ticket-left p, .ticket-right p {
+  margin: 0; /* Remove margin for paragraphs to avoid extra space */
+  flex-basis: 70%; /* Adjust this to control width of answers */
+}
+
+.bookingTitle{
+  color: rgb(255, 229, 192);
+}
+
+
+.label2 {
+  font-weight: bold;
+  margin-right: 10px; /* Space between label and answer */
+  flex-basis: 30%; /* Adjust this to control width of labels */
+  color: #2c85ac;
+}
+
+.tag2 {
+  margin: 0; /* Space between label and answer */
+  flex-basis: 70%; /* Adjust this to control width of labels */
+  color: #2c85ac;
+}
+
+
+/* Fullscreen enlarged ticket */
+/* Hover highlight */
+.ticket:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02); /* Slightly enlarge on hover */
+  cursor: pointer;
+}
+
+.ticket:hover:not(.ticket-fullscreen) {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02); /* Slightly enlarge on hover */
+  cursor: pointer;
+}
+
+/* Fullscreen enlarged ticket */
+.ticket-fullscreen {
+  position: fixed;
+  top: 30%;
+  left: 10%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  height: auto; /* Let the ticket's height adjust */
+  z-index: 9999; /* Bring it on top */
+  background-color: #fff;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.3);
+  overflow: auto; /* Allow scrolling within the ticket if it overflows */
+  padding: 20px;
+  border-radius: 10px;
+  /* Disable hover effects on fullscreen ticket */
+  transform: none !important;
+}
+
+/* Blur non-fullscreen tickets */
+.booking-history.blur-background .ticket:not(.ticket-fullscreen) {
+  filter: blur(5px);
+}
+
+/* Overlay to darken the background when a ticket is fullscreen */
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+  z-index: 9998; /* Below the fullscreen ticket */
+}
+
+/* Close button for the enlarged ticket */
+.ticket-close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10000; /* Make sure the close button is on top */
+}
+

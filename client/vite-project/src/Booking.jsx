@@ -74,7 +74,7 @@ function Booking() {
 
   return (
     <div className="booking-container">
-      <h1>Search for Flights</h1>
+      <h1 className='h1'>Search for Flights</h1>
       <div className="search-bar">
         <div className="input-container">
           <input
@@ -124,11 +124,11 @@ function Booking() {
       {noFlightsMessage && <p>{noFlightsMessage}</p>}
 
       {flights.length > 0 && (
-        <div>
+        <div className='flight-list'>
           <h2>Available Flights</h2>
-          <ul>
+          <ul className='ul'>
             {flights.map((flight) => (
-              <li key={flight.id}>
+              <li className='li' key={flight.id}>
                 Flight {flight.flightNumber} from {flight.startPoint} to {flight.destination} on {flight.flightDate}
                 <button className="book-button" onClick={() => bookFlight(flight.id)}>Book</button>
               </li>

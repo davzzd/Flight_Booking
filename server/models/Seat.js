@@ -1,29 +1,34 @@
-// models/Seat.js
 module.exports = (sequelize, DataTypes) => {
-  const Seat = sequelize.define('Seat', {
+    const Seat = sequelize.define('Seat', {
       seatNumber: {
-          type: DataTypes.STRING,
-          allowNull: false,
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       flightId: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
       isBooked: {
-          type: DataTypes.BOOLEAN,
-          defaultValue: false, // Initially, seats are not booked
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
       },
       seatClass: {
-          type: DataTypes.ENUM('economy', 'business', 'first'),
-          allowNull: false,
+        type: DataTypes.ENUM('economy', 'business', 'first'),
+        allowNull: false,
       },
-  });
-
-  // Associate Seat with Flight
-  Seat.associate = function(models) {
+    });
+  
+    // Associations
+    Seat.associate = function(models) {
       Seat.belongsTo(models.Flight, { foreignKey: 'flightId' });
+  
+      Seat.belongsToMany(models.Booking, {
+        through: 'BookingSeats', // Junction table for many-to-many relationship
+        foreignKey: 'seatId',
+        otherKey: 'bookingId',
+      });
+    };
+  
+    return Seat;
   };
-
-  return Seat;
-};
-
+  

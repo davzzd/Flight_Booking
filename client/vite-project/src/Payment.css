@@ -1,0 +1,10 @@
+.payment-container{
+    align-items: center;
+      background: rgba(255, 255, 255, 0.2); /* Translucent background */
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+      backdrop-filter: blur(10px); /* For a blurred glass-like effect */
+      -webkit-backdrop-filter: blur(10px); /* For Safari support */
+       border: 1px solid rgba(255, 255, 255, 0.3); /* Optional: subtle border */
+       padding: 20px;
+       border-radius: 20px;
+}

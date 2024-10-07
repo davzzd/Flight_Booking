@@ -1,35 +1,80 @@
+/* Seat booking container styles */
 .seat-booking-container {
-    text-align: center;
-  }
-  
-  .seat-map {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin: 20px 0;
-  }
-  
-  .seat {
-    padding: 10px;
-    border: 1px solid #000;
-    background-color: lightgray;
-    cursor: pointer;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .seat.selected {
-    background-color: green;
-    color: white;
-  }
-  
-  .seat.booked {
-    background-color: red;
-    cursor: not-allowed;
-    color: white;
-  }
-  
+  text-align: center;
+  background: rgba(255, 255, 255, 0.2); /* Translucent background */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  backdrop-filter: blur(10px); /* For a blurred glass-like effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Optional: subtle border */
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px auto; /* Center the container and add space at the top */
+  max-width: 1000px; /* Set a max width for better layout */
+  min-height: 100vh; /* Ensure the container covers the viewport height */
+  margin-top: 700px;
+}
+
+.seat-map {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.seat {
+  padding: 10px;
+  border: 1px solid #00008a;
+  border-radius: 5px;
+  background-color: lightgray;
+  cursor: pointer;
+  width: 60px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.seat.selected {
+  background-color: rgb(21, 164, 121);
+  color: white;
+}
+
+.seat.booked {
+  background-color: rgb(49, 26, 63);
+  cursor: not-allowed;
+  color: white;
+}
+
+.heading {
+  margin-bottom: 0px;
+  margin-top: 20px; /* Adjusted for better spacing */
+}
+
+.seat a:hover {
+  color: #4507ff; /* Change link color on hover */
+}
+
+.seat:hover:not(.booked) {
+  background-color: #5bc0de;
+}
+
+.seat-category h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Additional styles for the next button if needed */
+.next-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.next-button:hover {
+  background-color: #0056b3;
+}
