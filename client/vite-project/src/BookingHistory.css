@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items:center;
   margin-top: 200px;
-  width: 800px;
+  width: 900px;
   height: 100vh;
   padding: 30px;
   border-radius: 15px;
@@ -74,6 +74,25 @@
     #fff 4px
   );
   margin-top: 20px;
+}
+
+.expiry {
+  font-size: 12px;
+  color: #df0000;
+  margin-top: 5px;
+}
+.expmes {
+  font-size: 35px;
+  font-style: Bold;
+  color: #df0000;
+  opacity: 0.5;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  rotate: 340deg;
+  margin-top: 10px;
 }
 
 @media screen and (max-width: 600px) {
@@ -197,3 +216,26 @@
   cursor: pointer;
   z-index: 10000; /* Make sure the close button is on top */
 }
+/* Tabs styling */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.tab.active {
+  background-color: #ff8000;
+  color: white;
+}
+
+/* Rest of your existing CSS */

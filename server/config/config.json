@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "david456",
-    "database": "flight-booking",
-    "host": "localhost",
+    "username": "freedb_adminuse",
+    "password": "M&Ve$H6hHC56aNX",
+    "database": "freedb_flight_booking",
+    "host": "sql.freedb.tech",
     "dialect": "mysql"
   },
   "test": {
