@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './BookingHistory.css';
+import TicketPre from './component/ticketpre';
 
 function BookingHistory() {
   const [bookings, setBookings] = useState([]);
@@ -8,9 +9,15 @@ function BookingHistory() {
   const [expiredBookings, setExpiredBookings] = useState([]);
   const [activeTab, setActiveTab] = useState('live'); // Track active tab
   const [fullscreenTicket, setFullscreenTicket] = useState(null); // Track which ticket is in fullscreen
+  const [loading, setLoading] = useState(true); // Loading state for preloader
+  const [fadeOut, setFadeOut] = useState(false); // To control the fade-out effect
   const username = localStorage.getItem('username'); // Retrieve username from localStorage
 
   useEffect(() => {
+    const timeout = setTimeout(() => {
+      setFadeOut(true); // Start fade-out after 3 seconds
+      setTimeout(() => setLoading(false), 100); // Hide preloader after fade-out
+    }, 4000); // 3 seconds timeout for loading the preloader
     const fetchBookingHistory = async () => {
       try {
         const response = await axios.get(`http://localhost:3001/api/bookings/booking-history/${username}`);
@@ -29,8 +36,13 @@ function BookingHistory() {
       }
     };
     fetchBookingHistory();
+    return () => clearTimeout(timeout);
   }, [username]);
 
+  // Show the preloader with fade-out effect
+  if (loading) {
+    return <div className={`preloader-container ${fadeOut ? 'fade-out' : ''}`}><TicketPre /></div>;
+  }
   // Function to open a ticket in fullscreen
   const handleTicketClick = (ticket) => {
     setFullscreenTicket(ticket);

@@ -1,0 +1,28 @@
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vid{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preloader-container {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
