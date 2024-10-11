@@ -96,6 +96,12 @@
       padding: 30px;
       border-radius: 15px;
       background-image: linear-gradient(to top, #0099e0 0%, #2b40ff 100%);
+      overflow-y: auto; /* Allow vertical scrolling */
+      scrollbar-color: rgb(29, 47, 83) rgb(82, 125, 216);
+      scrollbar-width: thin;
+      scrollbar-highlight-color: #ff5e00;
+      scrollbar-arrow-color: #f0f0f0;
+      
     }
     
     li:last-child {

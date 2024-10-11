@@ -1,59 +1,43 @@
-body {
-    height: 100vh;  /* Full viewport height */
-    background-image: url('./assets/background.jpg');  /* Path to your background image */
-    background-size: cover;   /* Ensures the image covers the full page */
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;   /* Adjust text color based on your image */
-    text-align: center;
-  }
-  
   .homepage-container {
     text-align: center;
     padding: 50px 0;
     position: relative;
     margin-left: none;
-   
   }
   
   .homepage-title {
     font-size: 3.4em;
     font-weight: bold;
     color: #ffffff;
-    text-shadow:2px 2px #ff8800;
+    text-shadow: 2px 2px #ff8800;
     text-align: start;
     margin-top: -40px;
     padding-top: none;
   }
   
-  .smalltitle{
+  .smalltitle {
     font-size: 1.5em;
     font-weight: bold;
     color: #ffffff;
-    text-shadow:2px 2px #ff8800;
+    text-shadow: 2px 2px #ff8800;
     margin-top: -20px;
     margin-bottom: 50px;
     text-align: start;
   }
-
-
+  
   .countries-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 50px;
     width: 1070px;
   }
   
   .country-card {
     position: relative;
     flex: 1;
-    overflow:hidden;
+    overflow: hidden;
     height: 350px;
- /*   width: 200px;  Split into two equal columns with spacing */
+    border-radius: 20px;
   }
   
   .country-image {
@@ -64,9 +48,9 @@ body {
     transition: transform 0.3s ease-in-out;
   }
   
-  .country-card:hover .country-image {
+  .countries-container:hover .country-card:hover .country-image {
     transform: scale(1.1); /* Zoom on hover */
-    
+    border-radius: 20px;
   }
   
   .hover-text {
@@ -96,16 +80,6 @@ body {
     cursor: pointer;
   }
   
-  .arrow {
-    position: fixed;
-    bottom: 50px;
-    right: 50px;
-    font-size: 3em;
-    color: #ff6600;
-    animation: bounce 1.5s infinite;
-    cursor: pointer;
-  }
-  
   @keyframes bounce {
     0%, 100% {
       transform: translateY(0);
@@ -114,4 +88,5 @@ body {
       transform: translateY(-10px);
     }
   }
+  
   
