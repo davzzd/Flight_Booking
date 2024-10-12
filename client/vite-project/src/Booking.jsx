@@ -45,14 +45,11 @@ function Booking() {
     fetchDestinations();
   }, []);
 
-  const searchFlights = async () => {
+  // Fetch flights when the page loads or when searching
+  const searchFlights = async (searchParams = {}) => {
     try {
       const response = await axios.get('http://localhost:3001/api/flights', {
-        params: { 
-          startPoint, 
-          destination, 
-          flightDate: flightDate ? formatDate(flightDate) : '' 
-        },
+        params: searchParams,
       });
 
       if (response.data.length === 0) {
@@ -64,8 +61,22 @@ function Booking() {
       setFlights(response.data);
     } catch (error) {
       console.error('Error fetching flights', error);
-      alert('Failed to fetch flights');
+      setNoFlightsMessage('No flights available matching the criteria');
     }
+  };
+
+  // Fetch all flights on page load
+  useEffect(() => {
+    searchFlights(); // Fetch all flights without any filters initially
+  }, []);
+
+  const handleSearch = () => {
+    const searchParams = { 
+      startPoint, 
+      destination, 
+      flightDate: flightDate ? formatDate(flightDate) : '' 
+    };
+    searchFlights(searchParams);
   };
 
   const bookFlight = (flightId) => {
@@ -118,7 +129,7 @@ function Booking() {
           />
         </div>
 
-        <button className='search-button' onClick={searchFlights}>Search Flights</button>
+        <button className='search-button' onClick={handleSearch}>Search Flights</button>
       </div>
 
       {noFlightsMessage && <p>{noFlightsMessage}</p>}
