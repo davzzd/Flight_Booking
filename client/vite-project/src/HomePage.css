@@ -1,5 +1,5 @@
   .homepage-container {
-    text-align: center;
+    text-align: left;
     /* padding: 10px 0; */
     position: relative;
     align-items: left;
@@ -22,12 +22,15 @@
     color: #ffffff;
     text-shadow: 2px 2px #ff8800;
     margin-top: -20px;
+    top: auto;
     margin-bottom: 50px;
     text-align: start;
   }
   
   .countries-container {
     display: flex;
+    justify-content: center;
+    top: auto;
     flex-wrap: wrap;
     gap: 100px;
     width: 1200px;
@@ -37,11 +40,19 @@
     position: relative;
     flex: 1;
     overflow: hidden;
-  
     height: 450px;
     border-radius: 20px;
   }
-  
+  .name{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px #ff8800;
+    margin-top: -20px;
+    top: auto;
+    margin-bottom: 50px;
+    text-align: center;
+  }
   .country-image {
     border-radius: 20px;
     height: 100%;

@@ -20,6 +20,7 @@ function App() {
 
   return (
     <div className="App">
+      
       <header className="navbar">
         <nav>
           <Link to="/">Home</Link>
@@ -33,6 +34,7 @@ function App() {
           )}
         </nav>
       </header>
+      <header><Link to="/" className='logo'>DavFlights</Link></header>
 
       <Routes>
         <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />

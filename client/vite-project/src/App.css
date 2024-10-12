@@ -42,14 +42,29 @@ html, body {
   font-weight: bold;
 }
 
+.logo {
+  width: 100px;
+  height: 120px;
+  font-size: 50px;
+  position : absolute;
+  text-decoration: none;
+  font-style: italic, bold;
+  color: white;
+  text-shadow: grey 2px 2px 2px;
+  top: 5px;
+  left: 10px;
+  display: block;
+  z-index: 100;
+}
 /* Navbar styling */
 .navbar {
+  background-color: rgba(223, 223, 223, 0.04); /* Semi-transparent black */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 25px;
   position: absolute; /* To position it at the top */
-  top: 0;
+  top: 0px;
   left: 0;
   right: 0;
   z-index: 10;
@@ -65,6 +80,7 @@ html, body {
 .navbar a {
   margin-left: 20px;
   font-size: 18px;
+  text-shadow: grey 2px 2px 2px;
   text-decoration: none;
   color: white;
   font-weight: bold;

@@ -23,7 +23,7 @@ function HomePage({ isLoggedIn }) {
               <button className='butto' onClick={() => navigate('/booking')}>Book Now</button>
             ) : (
               <>
-                <p>Please log in to continue</p>
+                <p className='name'>JAPAN</p>
                 <button className='butto' onClick={handleLoginClick}>Log In</button>
               </>
             )}
@@ -37,7 +37,7 @@ function HomePage({ isLoggedIn }) {
               <button className='butto' onClick={() => navigate('/booking')}>Book Now</button>
             ) : (
               <>
-                <p>Please log in to continue</p>
+                <p className='name'>FRANCE</p>
                 <button className='butto' onClick={handleLoginClick}>Log In</button>
               </>
             )}
@@ -51,7 +51,7 @@ function HomePage({ isLoggedIn }) {
               <button className='butto' onClick={() => navigate('/booking')}>Book Now</button>
             ) : (
               <>
-                <p>Please log in to continue</p>
+                <p className='name'>AUSTRALIA</p>
                 <button className='butto' onClick={handleLoginClick}>Log In</button>
               </>
             )}
