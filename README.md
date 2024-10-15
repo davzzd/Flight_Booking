@@ -26,4 +26,6 @@ This is a simple flight booking app developed as part of a DBMS course project. 
 
 ## Presentation
 
-```bash https://www.canva.com/design/DAGTdBHHckA/bUR_yjHctnFCQlk4pegmSw/edit?utm_content=DAGTdBHHckA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+```bash
+   https://www.canva.com/design/DAGTdBHHckA/bUR_yjHctnFCQlk4pegmSw/edit?utm_content=DAGTdBHHckA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
