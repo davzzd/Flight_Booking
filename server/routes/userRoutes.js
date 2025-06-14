@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const db = require('../models');
 
-// Register a new user
+//register
 router.post('/register', async (req, res) => {
   const { username, password, firstName, lastName, country } = req.body;
 
@@ -35,7 +35,6 @@ router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // Normalize username to lowercase
     const user = await db.User.findOne({ where: { username: username.toLowerCase() } });
     
     if (!user) {
@@ -47,10 +46,9 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid password" });
     }
 
-    // Log success for debugging
     console.log(`User ${user.username} logged in successfully`);
 
-    // Return the username to be stored in localStorage
+    //storing username in localstorage
     res.status(200).json({ message: "Login successful", username: user.username });
   } catch (error) {
     console.error("Login server error:", error);

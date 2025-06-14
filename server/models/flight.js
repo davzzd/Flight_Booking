@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
 
-    // Associate Flight with Seats
+    //Associate Flight with Seats
     Flight.associate = function(models) {
         Flight.hasMany(models.Seat, { foreignKey: 'flightId', as: 'seats' });
     };

@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  // Associations
+  //Associations
   Booking.associate = (models) => {
     Booking.belongsTo(models.User, {
       foreignKey: "username",
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     
     Booking.belongsToMany(models.Seat, { 
-      through: 'BookingSeats', // Junction table for many-to-many relationship
+      through: 'BookingSeats', //Junction table for many-to-many relationship
       foreignKey: 'bookingId',
       otherKey: 'seatId',
     });

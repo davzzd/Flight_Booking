@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './Booking.css';  // Import the new CSS file
+import './Booking.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function Booking() {
@@ -16,10 +16,9 @@ function Booking() {
 
   const formatDate = (date) => {
     const d = new Date(date);
-    return d.toISOString().split('T')[0]; // Returns date in YYYY-MM-DD format
+    return d.toISOString().split('T')[0];
   };
 
-  // Fetch start point suggestions
   useEffect(() => {
     const fetchStartPoints = async () => {
       try {
@@ -32,7 +31,6 @@ function Booking() {
     fetchStartPoints();
   }, []);
 
-  // Fetch destination suggestions
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
@@ -45,7 +43,6 @@ function Booking() {
     fetchDestinations();
   }, []);
 
-  // Fetch flights when the page loads or when searching
   const searchFlights = async (searchParams = {}) => {
     try {
       const response = await axios.get('http://localhost:3001/api/flights', {
@@ -65,9 +62,8 @@ function Booking() {
     }
   };
 
-  // Fetch all flights on page load
   useEffect(() => {
-    searchFlights(); // Fetch all flights without any filters initially
+    searchFlights();
   }, []);
 
   const handleSearch = () => {
@@ -96,7 +92,7 @@ function Booking() {
             list="startPointSuggestions"
             className="dropdown-input"
           />
-          <i className="fas fa-plane"></i> {/* Flight icon */}
+          <i className="fas fa-plane"></i>
           <datalist id="startPointSuggestions">
             {startPointSuggestions.map((suggestion, index) => (
               <option key={index} value={suggestion} />
@@ -113,7 +109,7 @@ function Booking() {
             list="destinationSuggestions"
             className="dropdown-input"
           />
-          <i className="fas fa-plane"></i> {/* Flight icon */}
+          <i className="fas fa-plane"></i>
           <datalist id="destinationSuggestions">
             {destinationSuggestions.map((suggestion, index) => (
               <option key={index} value={suggestion} />

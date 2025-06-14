@@ -4,17 +4,16 @@ import Login from './Login';
 import Booking from './Booking';
 import './App.css';
 import HomePage from './HomePage';
-import SeatBooking from './SeatBooking'; // New seat booking component
-import Payment from './Payment'; // New payment component
-import BookingHistory from './BookingHistory'; // Import the Booking History component
+import SeatBooking from './SeatBooking';
+import Payment from './Payment';
+import BookingHistory from './BookingHistory';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // To track login state
-  const [username, setUsername] = useState(null); // Track logged-in user's username
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState(null);
 
   const handleLogin = (username) => {
-  //  localStorage.setItem('username', username); // Store the username in local storage
-    setUsername(username); // Set the username state
+    setUsername(username);
     setIsLoggedIn(true);
   };
 
@@ -40,9 +39,9 @@ function App() {
         {isLoggedIn ? (
           <>
             <Route path="/booking" element={<Booking />} />
-            <Route path="/seat-booking" element={<SeatBooking username={username} />} /> {/* Pass username */}
+            <Route path="/seat-booking" element={<SeatBooking username={username} />} />
             <Route path="/payment" element={<Payment />} />
-            <Route path="/booking-history" element={<BookingHistory username={username} />} /> {/* Pass username */}
+            <Route path="/booking-history" element={<BookingHistory username={username} />} />
           </>
         ) : (
           <Route path="/booking" element={<Navigate to="/login" />} />

@@ -1,15 +1,15 @@
-// routes/bookingRoutes.js
+//routes/bookingRoutes.js
 const express = require('express');
 const { Booking, Flight, Seat, BookingSeats,User } = require('../models');
 const router = express.Router();
 
-// Get all bookings for a logged-in user by username
+//Get all bookings for a logged-in user by username
 router.get('/user/:username', async (req, res) => {
   const { username } = req.params;
   try {
     const bookings = await Booking.findAll({
       where: { username },
-      include: [Flight, Seat],  // Include related flight and seat data
+      include: [Flight, Seat],  //Include related flight and seat data
     });
     res.json(bookings);
   } catch (error) {
@@ -17,7 +17,7 @@ router.get('/user/:username', async (req, res) => {
   }
 });
 
-// Get booking history for a logged-in user by username
+//Get booking history for a logged-in user by username
 router.get('/booking-history/:username', async (req, res) => {
   const { username } = req.params;
   try {
@@ -26,7 +26,7 @@ router.get('/booking-history/:username', async (req, res) => {
       include: [
         { model: Seat, as: 'Seats' },
         { model: Flight, as: 'Flight' },
-        { model: User, as: 'User' },  // Include user details
+        { model: User, as: 'User' },  //Include user details
       ],
     });
 
@@ -37,8 +37,8 @@ router.get('/booking-history/:username', async (req, res) => {
       seats: booking.Seats.map(seat => seat.seatNumber),
       flightFrom: booking.Flight.startPoint,
       flightTo: booking.Flight.destination,
-      date: booking.Flight.flightDate,  // Fix the date field
-      fullName: `${booking.User.firstName} ${booking.User.lastName}`,  // Concatenate first and last names
+      date: booking.Flight.flightDate,  //Fix the date field
+      fullName: `${booking.User.firstName} ${booking.User.lastName}`,  //Concatenate first and last names
       boardingTime: generateRandomBoardingTime(),
     }));
 

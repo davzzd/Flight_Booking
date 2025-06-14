@@ -15,10 +15,9 @@ function SeatBooking() {
   const flightId = searchParams.get('flightId');
   const navigate = useNavigate();
 
-  // Fetch the username from localStorage and set it
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
-    console.log("Stored Username:", storedUsername);  // Debugging
+    console.log("Stored Username:", storedUsername);
     if (storedUsername) {
       setUsername(storedUsername);
     } else {
@@ -26,7 +25,6 @@ function SeatBooking() {
       navigate('/login');
     }
 
-    // Fetch available seats for the flight
     const fetchSeats = async () => {
       try {
         const response = await axios.get(`http://localhost:3001/api/seats/${flightId}`);
@@ -38,7 +36,6 @@ function SeatBooking() {
 
     fetchSeats();
 
-    // Listen for real-time seat updates via Socket.io
     socket.on('seatUpdate', (updatedSeats) => {
       setSeats(updatedSeats);
     });
@@ -48,7 +45,6 @@ function SeatBooking() {
     };
   }, [flightId, navigate]);
 
-  // Handle seat selection
   const handleSeatSelect = (seat) => {
     if (seat.isBooked) return;
     if (selectedSeats.includes(seat.id)) {
@@ -58,13 +54,12 @@ function SeatBooking() {
     }
   };
 
-  // Proceed to booking the selected seats
   const handleNext = async () => {
     if (selectedSeats.length === 0) {
       alert('Please select at least one seat before proceeding.');
       return;
     }
-    console.log("Username being passed:", username);  // Debugging
+    console.log("Username being passed:", username);
     try {
       await axios.post('http://localhost:3001/api/seats/book', {
         seatIds: selectedSeats,
@@ -78,14 +73,12 @@ function SeatBooking() {
     }
   };
 
-  // Group seats by class type
   const groupedSeats = seats.reduce((groups, seat) => {
-    const seatClass = seat.seatClass; // Use the correct property name here
+    const seatClass = seat.seatClass;
     groups[seatClass] = groups[seatClass] || [];
     groups[seatClass].push(seat);
     return groups;
   }, {});
-  
 
   return (
     <div className="seat-booking-container">
@@ -117,8 +110,7 @@ function SeatBooking() {
         Next
       </button>
     </div>
-);
-
+  );
 }
 
 export default SeatBooking;

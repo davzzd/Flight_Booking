@@ -1,16 +1,15 @@
-/* Seat booking container styles */
 .seat-booking-container {
   text-align: center;
-  background: rgba(255, 255, 255, 0.2); /* Translucent background */
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  backdrop-filter: blur(10px); /* For a blurred glass-like effect */
-  -webkit-backdrop-filter: blur(10px); /* For Safari support */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Optional: subtle border */
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px); 
+  border: 1px solid rgba(255, 255, 255, 0.3); 
   border-radius: 15px;
   padding: 20px;
-  margin: 20px auto; /* Center the container and add space at the top */
-  max-width: 1000px; /* Set a max width for better layout */
-  min-height: 100vh; /* Ensure the container covers the viewport height */
+  margin: 20px auto; /*Center the container and add space at the top */
+  max-width: 1000px; 
+  min-height: 100vh; 
   margin-top: 350px;
 }
 
@@ -48,11 +47,11 @@
 
 .heading {
   margin-bottom: 0px;
-  margin-top: 20px; /* Adjusted for better spacing */
+  margin-top: 20px;
 }
 
 .seat a:hover {
-  color: #4507ff; /* Change link color on hover */
+  color: #4507ff; 
 }
 
 .seat:hover:not(.booked) {
@@ -64,7 +63,6 @@
   margin-bottom: 10px;
 }
 
-/* Additional styles for the next button if needed */
 .next-button {
   margin-top: 20px;
   padding: 10px 20px;

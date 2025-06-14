@@ -5,42 +5,38 @@ import './Payment.css';
 function Payment() {
   const location = useLocation();
   const navigate = useNavigate();
-  const seatIds = new URLSearchParams(location.search).get('seatIds')?.split(',') || []; // Get multiple seat IDs from the URL
+  const seatIds = new URLSearchParams(location.search).get('seatIds')?.split(',') || [];
   const flightId = new URLSearchParams(location.search).get('flightId');
-  const [loading, setLoading] = useState(false); // State to manage loading
-  const [paymentSuccess, setPaymentSuccess] = useState(false); // State to manage payment success message
-  const [countdown, setCountdown] = useState(7); // Countdown timer state
+  const [loading, setLoading] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [countdown, setCountdown] = useState(7);
 
   useEffect(() => {
     let countdownInterval;
 
     if (paymentSuccess) {
-      // Start countdown when payment is successful
       countdownInterval = setInterval(() => {
         setCountdown((prevCountdown) => {
           if (prevCountdown <= 1) {
             clearInterval(countdownInterval);
-            navigate('/booking-history'); // Redirect to Booking History page
-            return 0; // Stop countdown
+            navigate('/booking-history');
+            return 0;
           }
-          return prevCountdown - 1; // Decrease countdown
+          return prevCountdown - 1;
         });
-      }, 1000); // Update countdown every second
+      }, 1000);
     }
 
-    return () => clearInterval(countdownInterval); // Cleanup interval on unmount
+    return () => clearInterval(countdownInterval);
   }, [paymentSuccess, navigate]);
 
   const confirmBooking = () => {
-    // Set loading to true
     setLoading(true);
     
-    // Simulate a delay for payment processing (3 seconds)
     setTimeout(() => {
-      // After processing, show "Payment Successful" message
-      setLoading(false); // Stop loading
-      setPaymentSuccess(true); // Show payment success message
-    }, 3000); // Simulate a 3-second delay for payment processing
+      setLoading(false);
+      setPaymentSuccess(true);
+    }, 3000);
   };
 
   return (
@@ -54,19 +50,18 @@ function Payment() {
         ))}
       </ul>
 
-      {/* Button and loading state */}
       {!paymentSuccess ? (
         <button onClick={confirmBooking} disabled={loading}>
           {loading ? 'Processing...' : 'Confirm and Pay'}
         </button>
       ) : (
         <div>
-          <p>Payment Successful!</p>  {/* Show this message after payment success */}
-          <p>Redirecting to bookings page in {countdown}...</p> {/* Countdown message */}
+          <p>Payment Successful!</p>
+          <p>Redirecting to bookings page in {countdown}...</p>
         </div>
       )}
 
-      {loading && <p>Loading...</p>} {/* Show loading message if loading */}
+      {loading && <p>Loading...</p>}
     </div>
   );
 }

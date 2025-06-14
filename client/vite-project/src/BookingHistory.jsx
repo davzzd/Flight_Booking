@@ -7,24 +7,23 @@ function BookingHistory() {
   const [bookings, setBookings] = useState([]);
   const [liveBookings, setLiveBookings] = useState([]);
   const [expiredBookings, setExpiredBookings] = useState([]);
-  const [activeTab, setActiveTab] = useState('live'); // Track active tab
-  const [fullscreenTicket, setFullscreenTicket] = useState(null); // Track which ticket is in fullscreen
-  const [loading, setLoading] = useState(true); // Loading state for preloader
-  const [fadeOut, setFadeOut] = useState(false); // To control the fade-out effect
-  const username = localStorage.getItem('username'); // Retrieve username from localStorage
+  const [activeTab, setActiveTab] = useState('live');
+  const [fullscreenTicket, setFullscreenTicket] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
+  const username = localStorage.getItem('username');
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setFadeOut(true); // Start fade-out after 3 seconds
-      setTimeout(() => setLoading(false), 100); // Hide preloader after fade-out
-    }, 4000); // 3 seconds timeout for loading the preloader
+      setFadeOut(true);
+      setTimeout(() => setLoading(false), 100);
+    }, 4000);
     const fetchBookingHistory = async () => {
       try {
         const response = await axios.get(`http://localhost:3001/api/bookings/booking-history/${username}`);
         const allBookings = response.data;
         setBookings(allBookings);
 
-        // Separate into live and expired bookings based on current date
         const currentDate = new Date();
         const live = allBookings.filter(booking => new Date(booking.date) >= currentDate);
         const expired = allBookings.filter(booking => new Date(booking.date) < currentDate);
@@ -39,16 +38,14 @@ function BookingHistory() {
     return () => clearTimeout(timeout);
   }, [username]);
 
-  // Show the preloader with fade-out effect
   if (loading) {
     return <div className={`preloader-container ${fadeOut ? 'fade-out' : ''}`}><TicketPre /></div>;
   }
-  // Function to open a ticket in fullscreen
+
   const handleTicketClick = (ticket) => {
     setFullscreenTicket(ticket);
   };
 
-  // Function to close the fullscreen ticket
   const handleCloseFullscreen = () => {
     setFullscreenTicket(null);
   };
@@ -58,17 +55,15 @@ function BookingHistory() {
       {fullscreenTicket && (
         <div
           className="fullscreen-overlay"
-          onClick={handleCloseFullscreen} // Close the ticket when clicking outside it
+          onClick={handleCloseFullscreen}
         ></div>
       )}
 
       <div className={`booking-history ${fullscreenTicket ? 'blur-background' : ''}`}>
         <h2 className="bookingTitle">Booking History for {username}</h2>
 
-        {/* Display total number of bookings */}
         <p>Total Tickets: {bookings.length}</p>
 
-        {/* Tabs for live and expired bookings */}
         <div className="tabs">
           <button 
             className={activeTab === 'live' ? 'tab active' : 'tab'} 
@@ -91,7 +86,7 @@ function BookingHistory() {
                 <div
                   key={booking.id}
                   className={`ticket ${fullscreenTicket && fullscreenTicket.id === booking.id ? 'ticket-fullscreen' : ''}`}
-                  onClick={() => handleTicketClick(booking)} // Click to enlarge the ticket
+                  onClick={() => handleTicketClick(booking)}
                 >
                   <div className="ticket-section">
                     <div className="ticket-left">
@@ -137,18 +132,18 @@ function BookingHistory() {
                         <p className="tag2">{booking.gateNumber || 'N/A'}</p>
                       </div>
 
-                      <div className="barcode"></div> {/* Barcode Placeholder */}
+                      <div className="barcode"></div>
                     </div>
 
                     {fullscreenTicket && fullscreenTicket.id === booking.id && (
                       <span
                         className="ticket-close-button"
                         onClick={(e) => {
-                          e.stopPropagation(); // Stop click from closing the ticket
+                          e.stopPropagation();
                           handleCloseFullscreen();
                         }}
                       >
-                        &times; {/* Close button */}
+                        &times;
                       </span>
                     )}
                   </div>
@@ -167,7 +162,7 @@ function BookingHistory() {
                 <div
                   key={booking.id}
                   className={`ticket ${fullscreenTicket && fullscreenTicket.id === booking.id ? 'ticket-fullscreen' : ''}`}
-                  onClick={() => handleTicketClick(booking)} // Click to enlarge the ticket
+                  onClick={() => handleTicketClick(booking)}
                 >
                   <div className="ticket-section">
                     <div className="ticket-left">
@@ -175,10 +170,6 @@ function BookingHistory() {
                         <p className="label">Name of passenger:</p>
                         <p>{booking.fullName}</p>
                       </div>
-{/* 
-                      </div>
-                        <p className="expmes">Expired</p>
-                      <div className="expiry"> */}
 
                       <div className="flex-row">
                         <p className="label">From:</p>
@@ -217,9 +208,8 @@ function BookingHistory() {
                         <p className="tag2">{booking.gateNumber || 'N/A'}</p>
                       </div>
 
-                      <div className="barcode"></div> {/* Barcode Placeholder */}
+                      <div className="barcode"></div>
                     </div>
-                    {/* div for expiry */}
                     </div>
                         <p className="expmes">Expired</p>
                         <div className="expiry">
@@ -228,11 +218,11 @@ function BookingHistory() {
                       <span
                         className="ticket-close-button"
                         onClick={(e) => {
-                          e.stopPropagation(); // Stop click from closing the ticket
+                          e.stopPropagation();
                           handleCloseFullscreen();
                         }}
                       >
-                        &times; {/* Close button */}
+                        &times;
                       </span>
                     )}
                   </div>

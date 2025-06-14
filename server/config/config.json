@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "freedb_adminuse",
-    "password": "M&Ve$H6hHC56aNX",
-    "database": "freedb_flight_booking",
+    "username": "freedb_dracalar2",
+    "password": "avyQ6!*7zxRD*YF",
+    "database": "freedb_davflights",
     "host": "sql.freedb.tech",
     "dialect": "mysql"
   },

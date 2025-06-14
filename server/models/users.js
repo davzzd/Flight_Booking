@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING,
       allowNull: false,
-      primaryKey: true, // Make username the primary key
+      primaryKey: true, 
     },
     password: {
       type: DataTypes.STRING,

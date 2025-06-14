@@ -18,12 +18,11 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
   
-    // Associations
     Seat.associate = function(models) {
       Seat.belongsTo(models.Flight, { foreignKey: 'flightId' });
   
       Seat.belongsToMany(models.Booking, {
-        through: 'BookingSeats', // Junction table for many-to-many relationship
+        through: 'BookingSeats', //Junction table for many-to-many relationship
         foreignKey: 'seatId',
         otherKey: 'bookingId',
       });

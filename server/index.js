@@ -5,39 +5,39 @@ const { Server } = require('socket.io');
 const db = require('./models');
 const userRoutes = require('./routes/userRoutes');
 const flightRoutes = require('./routes/flightRoutes');
-const seatRoutes = require('./routes/SeatRoutes'); // Import seatRoutes function
+const seatRoutes = require('./routes/SeatRoutes'); 
 const app = express();
 const axios = require('axios');
 const bookingRoutes = require('./routes/bookingRoutes');
 
 const server = http.createServer(app);
 
-// Initialize Socket.io
+//Socket.io
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:5173', // Your frontend address
+    origin: 'http://localhost:5173', //frontend
     methods: ['GET', 'POST'],
   },
 });
 
-// Make Socket.io available in all routes
+//Socket.io available in all routes
 app.set('socketio', io);
 
 app.use(cors());
 app.use(express.json());
 
-// Register routes
+//routes
 app.use('/api', userRoutes); 
 app.use('/api', flightRoutes); 
-app.use('/api/seats', seatRoutes(io)); // Pass io to seatRoutes
+app.use('/api/seats', seatRoutes(io)); 
 app.use('/api/bookings', bookingRoutes);
 
-// Handle Socket.io connections
+//Socket.io connections
 io.on('connection', (socket) => {
   console.log('A user connected:', socket.id);
 
   socket.on('seatBooked', (seatId) => {
-    io.emit('seatUpdated', seatId); // Broadcast to all clients
+    io.emit('seatUpdated', seatId); //broadcast to all clients
   });
 
   socket.on('disconnect', () => {
@@ -46,14 +46,14 @@ io.on('connection', (socket) => {
 });
 
 db.sequelize.sync().then(async () => {
-  server.listen(3001, async () => { // Use server.listen instead of app.listen
+  server.listen(3001, async () => { 
     console.log("Server is running on port 3001");
 
-    // Check if there are any flights in the database
+    //generate new flights if not enough
     const flightCount = await db.Flight.count();
-    if (flightCount === 0) {
+    if (flightCount < 50) {
       console.log("No flights found, generating random flights...");
-      await axios.post('http://localhost:3001/api/generateRandomFlights', { numFlights: 10 });
+      await axios.post('http://localhost:3001/api/generateRandomFlights', { numFlights: 30 });
       console.log("Random flights created.");
     }
   });

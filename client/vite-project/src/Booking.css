@@ -1,158 +1,148 @@
-  .booking-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;/* Aligns content towards the top */
-    align-items: center; /* Centers horizontally */
-    height: 100vh; /* Full viewport height */
-    padding: 20px;
-  }
-    
-    .h1 {
-      margin-top: 80px;
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-    
-    /* Container for the search form */
-    .search-bar {
-      margin-top: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items:flex-start;
-      margin-bottom: 30px;
-      width: max-content;
-      gap: 50px;
-    }
-    
-    input[type="date"] {
-      min-width: min-content;
-      font-size: 16px;
-      border: 1px solid #ddd;
-      border-radius: 25px;
+.booking-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
   
-    }
-    
-    /* Styling the datalist dropdowns */
-    datalist {
-      border: 1px solid #ddd;
-    }
-  
-    .search-button{
-      margin-top: 10px;
-      background-color: #ff8000;
-      color: white;
-      margin-bottom: 30px;
-      margin-left: -35px;
-      padding: 14px;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-    
-    .search-button:hover {
-      background-color: #ff5e00;
-    }
-  
-    .book-button {
-      background-color: #ffa600;
-      color: white;
-      padding: 8px 16px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    
-    .book-button:hover {
-      background-color: #f35613;
-    }
-  
-    /* Styles for the results list (flights list) */
-    .ul {
-      list-style-type: none;
-      padding: 0;
-      
-    }
-    
-    .li {
-      margin-bottom: 15px;
-      border-radius: 15px;
-      padding: 20px;
-      width: 700px;
-      background-color: rgb(255, 255, 255);
-      color: rgb(255, 255, 255);
-      padding: 12px;
-      border-bottom: 1px solid #ddd;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.2); /* Translucent background */
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-      backdrop-filter: blur(10px); /* For a blurred glass-like effect */
-      -webkit-backdrop-filter: blur(10px); /* For Safari support */
-       border: 1px solid rgba(255, 255, 255, 0.3); /* Optional: subtle border */
-    }
+.h1 {
+  margin-top: 80px;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
 
-    .flight-list{
-      padding: 30px;
-      border-radius: 15px;
-      background-image: linear-gradient(to top, #0099e0 0%, #2b40ff 100%);
-      overflow-y: auto; /* Allow vertical scrolling */
-      scrollbar-color: rgb(29, 47, 83) rgb(82, 125, 216);
-      scrollbar-width: thin;
-      scrollbar-highlight-color: #ff5e00;
-      scrollbar-arrow-color: #f0f0f0;
-      
-    }
-    
-    li:last-child {
-      border-bottom: none;
-    }
+.search-bar {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items:flex-start;
+  margin-bottom: 30px;
+  width: max-content;
+  gap: 50px;
+}
 
-    /* Custom styling for the dropdown list */
-    .dropdown-list {
-      max-height: 150px; /* Limit the height of the dropdown list */
-      overflow-y: auto;
-      background-color: white;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    
-    .dropdown-list li {
-      padding: 8px;
-      cursor: pointer;
-    }
-    
-    .dropdown-list li:hover {
-      background-color: #f0f0f0;
-    }
-    
-    .dropdown-list i {
-      margin-right: 10px;
-      color: #007bff;
-    }
-    
-    /* Ensures each input field is clearly separated from the others */
-    .input-container {
-      margin-bottom: 20px;
-      position: relative;
-    }
-    
-    input.dropdown-input {
-      font-size: 16px;
-      background-color: white;
-      width: 100%;
-      padding-right: 30px; /* Make space for the flight icon */
-    }
-    
-    /* Adding the flight icon inside the input field */
-    .input-container i {
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
-      color: #007bff;
-      font-size: 18px;
-    }
+input[type="date"] {
+  min-width: min-content;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+}
 
+datalist {
+  border: 1px solid #ddd;
+}
+
+.search-button{
+  margin-top: 10px;
+  background-color: #ff8000;
+  color: white;
+  margin-bottom: 30px;
+  margin-left: -35px;
+  padding: 14px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #ff5e00;
+}
+
+.book-button {
+  background-color: #ffa600;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.book-button:hover {
+  background-color: #f35613;
+}
+
+.ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.li {
+  margin-bottom: 15px;
+  border-radius: 15px;
+  padding: 20px;
+  width: 700px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.flight-list{
+  padding: 30px;
+  border-radius: 15px;
+  background-image: linear-gradient(to top, #0099e0 0%, #2b40ff 100%);
+  overflow-y: auto;
+  scrollbar-color: rgb(29, 47, 83) rgb(82, 125, 216);
+  scrollbar-width: thin;
+  scrollbar-highlight-color: #ff5e00;
+  scrollbar-arrow-color: #f0f0f0;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+.dropdown-list {
+  max-height: 150px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-list li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.dropdown-list li:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-list i {
+  margin-right: 10px;
+  color: #007bff;
+}
+
+.input-container {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+input.dropdown-input {
+  font-size: 16px;
+  background-color: white;
+  width: 100%;
+  padding-right: 30px;
+}
+
+.input-container i {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #007bff;
+  font-size: 18px;
+}
     
